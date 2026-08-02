@@ -23,9 +23,9 @@ No lint, typecheck, or test tooling exists.
 
 ## Customization
 
-Content lives inline in `index.html` (bio, projects, skills, experience, contact — see README table). 3D scene config is in `js/main.js`: `colorPalette` in `createParticles()`, `nodePositions` in `createDataFlow()`, camera/scene in the `HeroScene` class.
+Content lives inline in `index.html` (bio, projects, skills, experience, contact — see README table). 3D scene config is in `js/main.js`: hero = space scene (`createGalaxy()` milky-way band, `createStarfield()`, `createFallingStars()` rain-streak pool); skills = orbiting spheres. Camera/lights in each scene's `init()`.
 
 ## Restrictions
 
-- `.commandcode/taste/portfolio-&-design-preferences/taste.md` records the design taste constraints (single-page landing look, realistic PCB/space-theme 3D, flat-to-viewer orientation, monospace the real repo honestly header font vs sans body). Respect them when editing the 3D scene or layout.
+- `.commandcode/taste/portfolio-&-design-preferences/taste.md` records the design taste constraints (single-page landing look, realistic PCB/space-theme 3D, flat-to-viewer orientation, monospace header font vs sans body). Respect them when editing the 3D scene or layout. Hero scene is currently space-themed (milky way + falling stars) per explicit user override, not PCB.
 - Images live in `images/`; referenced from `index.html`.

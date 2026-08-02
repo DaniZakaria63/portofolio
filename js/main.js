@@ -4,12 +4,9 @@ class HeroScene {
 		this.scene = null;
 		this.camera = null;
 		this.renderer = null;
-		this.pcbGroup = null;
-		this.particles = null;
-		this.nodes = [];
-		this.traces = [];
-		this.tracePaths = [];
-		this.dataPackets = [];
+		this.galaxy = null;
+		this.starfield = null;
+		this.fallingStars = [];
 		this.mouseX = 0;
 		this.mouseY = 0;
 		this.targetX = 0;
@@ -27,8 +24,8 @@ class HeroScene {
 		const width = this.canvas.parentElement.offsetWidth;
 		const height = this.canvas.parentElement.offsetHeight;
 
-		this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-		this.camera.position.z = 15;
+		this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+		this.camera.position.set(0, 0, 20);
 
 		this.renderer = new THREE.WebGLRenderer({
 			canvas: this.canvas,
@@ -40,42 +37,29 @@ class HeroScene {
 		this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 		this.renderer.setClearColor(0x000000, 0);
 
-		const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
-		this.scene.add(ambientLight);
-
-		const pointLight = new THREE.PointLight(0x00f3ff, 1, 100);
-		pointLight.position.set(10, 10, 10);
-		this.scene.add(pointLight);
-
-		const pointLight2 = new THREE.PointLight(0x4ecdc4, 0.8, 100);
-		pointLight2.position.set(-10, -5, -10);
-		this.scene.add(pointLight2);
-
-		const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-		dirLight.position.set(5, 10, 7);
-		this.scene.add(dirLight);
-
-		this.createParticles();
-		this.createDataFlow();
+		this.createStarfield();
+		this.createGalaxy();
+		this.createFallingStars();
 
 		this.addEventListeners();
 		this.animate();
 	}
 
-	createParticles() {
-		const particleCount = this.isMobile ? 300 : 800;
+	createStarfield() {
+		const count = this.isMobile ? 800 : 1800;
 		const geometry = new THREE.BufferGeometry();
-		const positions = new Float32Array(particleCount * 3);
-		const colors = new Float32Array(particleCount * 3);
+		const positions = new Float32Array(count * 3);
+		const colors = new Float32Array(count * 3);
 
-		const colorPalette = [
-			[0x00f3ff, 0.3],
-			[0x4ecdc4, 0.3],
-			[0xff6b6b, 0.2],
+		const tints = [
+			new THREE.Color(0xffffff),
+			new THREE.Color(0xa6b8ff),
+			new THREE.Color(0xffe8c8),
+			new THREE.Color(0xc9d6ff),
 		];
 
-		for (let i = 0; i < particleCount; i++) {
-			const radius = 8 + Math.random() * 12;
+		for (let i = 0; i < count; i++) {
+			const radius = 24 + Math.random() * 30;
 			const theta = Math.random() * Math.PI * 2;
 			const phi = Math.acos(2 * Math.random() - 1);
 
@@ -83,262 +67,194 @@ class HeroScene {
 			positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
 			positions[i * 3 + 2] = radius * Math.cos(phi);
 
-			const colorChoice = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-			colors[i * 3] = (colorChoice[0] >> 16 & 0xff) / 255;
-			colors[i * 3 + 1] = (colorChoice[0] >> 8 & 0xff) / 255;
-			colors[i * 3 + 2] = (colorChoice[0] & 0xff) / 255;
+			const tint = tints[(Math.random() * tints.length) | 0];
+			const brightness = 0.5 + Math.random() * 0.5;
+			colors[i * 3] = tint.r * brightness;
+			colors[i * 3 + 1] = tint.g * brightness;
+			colors[i * 3 + 2] = tint.b * brightness;
 		}
 
 		geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 		geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
 		const material = new THREE.PointsMaterial({
-			size: 0.04,
+			size: this.isMobile ? 0.055 : 0.04,
 			vertexColors: true,
 			transparent: true,
-			opacity: 0.5,
+			opacity: 0.9,
 			sizeAttenuation: true,
 			depthWrite: false,
+			blending: THREE.AdditiveBlending,
 		});
 
-		this.particles = new THREE.Points(geometry, material);
-		this.scene.add(this.particles);
+		this.starfield = new THREE.Points(geometry, material);
+		this.scene.add(this.starfield);
 	}
 
-	createDataFlow() {
-		this.pcbGroup = new THREE.Group();
+	createGalaxy() {
+		const count = this.isMobile ? 1500 : 3800;
+		const geometry = new THREE.BufferGeometry();
+		const positions = new Float32Array(count * 3);
+		const colors = new Float32Array(count * 3);
 
-		const boardGeometry = new THREE.BoxGeometry(16, 0.1, 16);
-		const boardMaterial = new THREE.MeshStandardMaterial({
-			color: 0x0d2014,
-			roughness: 0.85,
-			metalness: 0.15,
-			transparent: true,
-			opacity: 0.92,
-		});
-		const board = new THREE.Mesh(boardGeometry, boardMaterial);
-		board.position.y = -0.06;
-		this.pcbGroup.add(board);
+		const arms = 4;
+		const armColors = [
+			new THREE.Color(0x7fd8ff),
+			new THREE.Color(0x00f3ff),
+			new THREE.Color(0x9b8cff),
+			new THREE.Color(0xff7ee5),
+		];
 
-		const gridGeometry = new THREE.BufferGeometry();
-		const gridPoints = [];
-		const gridSize = 8;
-		const gridStep = 1;
-		for (let i = -gridSize; i <= gridSize; i += gridStep) {
-			gridPoints.push(new THREE.Vector3(i, 0.01, -gridSize));
-			gridPoints.push(new THREE.Vector3(i, 0.01, gridSize));
-			gridPoints.push(new THREE.Vector3(-gridSize, 0.01, i));
-			gridPoints.push(new THREE.Vector3(gridSize, 0.01, i));
+		for (let i = 0; i < count; i++) {
+			const radius = Math.pow(Math.random(), 1.6) * 15;
+			const armIndex = i % arms;
+			const armAngle = armIndex * ((Math.PI * 2) / arms);
+			const spiral = armAngle + radius * 1.1;
+			const spread = 0.3 + radius * 0.5;
+
+			const x = Math.cos(spiral) * radius + (Math.random() - 0.5) * spread;
+			const y = (Math.random() - 0.5) * spread * 0.3;
+			const z = Math.sin(spiral) * radius + (Math.random() - 0.5) * spread;
+
+			positions[i * 3] = x;
+			positions[i * 3 + 1] = y;
+			positions[i * 3 + 2] = z;
+
+			const falloff = radius / 15;
+			const color = new THREE.Color(0xffffff).lerp(armColors[armIndex], Math.pow(falloff, 0.7));
+			const twinkle = 0.6 + Math.random() * 0.6;
+			colors[i * 3] = color.r * twinkle;
+			colors[i * 3 + 1] = color.g * twinkle;
+			colors[i * 3 + 2] = color.b * twinkle;
 		}
-		gridGeometry.setFromPoints(gridPoints);
-		const gridMaterial = new THREE.LineBasicMaterial({
-			color: 0x00aa44,
+
+		geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+		geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+		const material = new THREE.PointsMaterial({
+			size: this.isMobile ? 0.08 : 0.055,
+			vertexColors: true,
 			transparent: true,
-			opacity: 0.35,
-		});
-		const gridLines = new THREE.LineSegments(gridGeometry, gridMaterial);
-		this.pcbGroup.add(gridLines);
-
-		const borderGeometry = new THREE.BufferGeometry();
-		const borderWidth = 7.8;
-		const borderPoints = [
-			new THREE.Vector3(-borderWidth, 0.01, -borderWidth),
-			new THREE.Vector3(borderWidth, 0.01, -borderWidth),
-			new THREE.Vector3(borderWidth, 0.01, borderWidth),
-			new THREE.Vector3(-borderWidth, 0.01, borderWidth),
-		];
-		borderGeometry.setFromPoints(borderPoints);
-		const borderMaterial = new THREE.LineBasicMaterial({
-			color: 0x00cc44,
-			transparent: true,
-			opacity: 0.7,
-		});
-		const borderLines = new THREE.LineLoop(borderGeometry, borderMaterial);
-		this.pcbGroup.add(borderLines);
-
-		const nodePositions = [
-			{ pos: [-6, 0.01, 2], color: 0x00f3ff, name: 'CPU' },
-			{ pos: [-3, 0.01, 3], color: 0x4ecdc4, name: 'RAM' },
-			{ pos: [0, 0.01, 0], color: 0x00f3ff, name: 'CTRL' },
-			{ pos: [3, 0.01, -1], color: 0xff6b6b, name: 'SENSOR' },
-			{ pos: [6, 0.01, 1], color: 0xffbe0b, name: 'PWR' },
-			{ pos: [-2, 0.01, -3], color: 0x8a2bff, name: 'COMMS' },
-			{ pos: [4, 0.01, 3], color: 0x4ecdc4, name: 'STORAGE' },
-			{ pos: [-5, 0.01, -4], color: 0xff6b6b, name: 'IO' },
-			{ pos: [0, 0.01, -5], color: 0x00f3ff, name: 'BUS' },
-			{ pos: [7, 0.01, 0], color: 0xffbe0b, name: 'USB' },
-			{ pos: [-7, 0.01, -1], color: 0x8a2bff, name: 'GPIO' },
-			{ pos: [2, 0.01, 5], color: 0x4ecdc4, name: 'DEBUG' },
-		];
-
-		nodePositions.forEach((nodeData, idx) => {
-			const y = nodeData.pos[1];
-
-			const padGeometry = new THREE.CylinderGeometry(0.35, 0.35, 0.08, 16);
-			const padMaterial = new THREE.MeshStandardMaterial({
-				color: 0xb87333,
-				emissive: nodeData.color,
-				emissiveIntensity: 0.4,
-				roughness: 0.3,
-				metalness: 0.7,
-			});
-			const pad = new THREE.Mesh(padGeometry, padMaterial);
-			pad.position.set(nodeData.pos[0], y, nodeData.pos[2]);
-			pad.rotation.x = -Math.PI / 2;
-			pad.userData = nodeData;
-			this.pcbGroup.add(pad);
-			this.nodes.push(pad);
-
-			const compGeometry = new THREE.BoxGeometry(0.8, 0.4, 0.3);
-			const compMaterial = new THREE.MeshStandardMaterial({
-				color: 0x0a0a0f,
-				emissive: nodeData.color,
-				emissiveIntensity: 0.15,
-				roughness: 0.4,
-				metalness: 0.2,
-			});
-			const component = new THREE.Mesh(compGeometry, compMaterial);
-			component.position.set(
-				nodeData.pos[0] + 0.6,
-				y + 0.02,
-				nodeData.pos[2] + 0.4
-			);
-			this.pcbGroup.add(component);
-
-			const viaGeometry = new THREE.CylinderGeometry(0.12, 0.12, 0.18, 10);
-			const viaMaterial = new THREE.MeshStandardMaterial({
-				color: 0x222222,
-				emissive: 0x000000,
-				roughness: 0.8,
-				metalness: 0.9,
-			});
-			const via = new THREE.Mesh(viaGeometry, viaMaterial);
-			via.position.set(nodeData.pos[0], y - 0.08, nodeData.pos[2]);
-			via.rotation.x = -Math.PI / 2;
-			this.pcbGroup.add(via);
-
-			const ledGeometry = new THREE.SphereGeometry(0.12, 12, 12);
-			const ledMaterial = new THREE.MeshBasicMaterial({
-				color: nodeData.color,
-				emissive: nodeData.color,
-				emissiveIntensity: 0.6,
-				transparent: true,
-				opacity: 0.85,
-			});
-			const led = new THREE.Mesh(ledGeometry, ledMaterial);
-			led.position.set(
-				nodeData.pos[0] - 0.55,
-				y + 0.06,
-				nodeData.pos[2] + 0.45
-			);
-			this.pcbGroup.add(led);
-
-			const labelSprite = this.createLabelSprite(nodeData.name, nodeData.color);
-			labelSprite.position.set(
-				nodeData.pos[0] - 0.6,
-				y + 0.4,
-				nodeData.pos[2] + 0.4
-			);
-			this.pcbGroup.add(labelSprite);
+			opacity: 0.95,
+			sizeAttenuation: true,
+			depthWrite: false,
+			blending: THREE.AdditiveBlending,
 		});
 
-		const connections = [
-			[0, 1], [1, 2], [2, 3], [3, 4],
-			[4, 8], [8, 5], [5, 0], [0, 6],
-			[6, 4], [2, 7], [7, 11], [11, 8],
-			[4, 9], [9, 6], [3, 10], [10, 0],
-			[5, 7], [2, 9], [1, 6], [8, 10],
-		];
+		const points = new THREE.Points(geometry, material);
 
-		const layerElevations = [0.02, 0.12, 0.22, 0.32, 0.42, 0.52];
-
-		connections.forEach(([i, j], traceIndex) => {
-			const start = this.nodes[i].position;
-			const end = this.nodes[j].position;
-			const midX = (start.x + end.x) / 2;
-			const midZ = (start.z + end.z) / 2;
-			const layerHeight = layerElevations[traceIndex % layerElevations.length];
-
-			const curve = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(start.x, start.y + 0.02, start.z),
-				new THREE.Vector3(start.x, start.y + layerHeight * 0.5, midZ),
-				new THREE.Vector3(midX, start.y + layerHeight, midZ),
-				new THREE.Vector3(end.x, start.y + layerHeight * 0.5, end.z),
-				new THREE.Vector3(end.x, start.y + 0.02, end.z),
-			]);
-
-			const tubeGeometry = new THREE.TubeGeometry(curve, 60, 0.08, 8, false);
-			const traceColor = 0xcd7f32;
-			const material = new THREE.MeshStandardMaterial({
-				color: traceColor,
-				emissive: this.nodes[i].userData.color,
-				emissiveIntensity: 0.4,
-				roughness: 0.3,
-				metalness: 0.8,
-				transparent: true,
-				opacity: 0.85,
-			});
-			const tube = new THREE.Mesh(tubeGeometry, material);
-			tube.userData = { curve, traceColor, layerHeight };
-			this.pcbGroup.add(tube);
-			this.traces.push(tube);
-			this.tracePaths.push({ curve, startColor: this.nodes[i].userData.color, layerHeight });
-		});
-
-		const packetGeometry = new THREE.SphereGeometry(0.12, 12, 12);
-
-		connections.forEach(([i, j], traceIndex) => {
-			const packetCount = this.isMobile ? 3 : 8;
-			const nodeColor = this.nodes[i].userData.color;
-			for (let p = 0; p < packetCount; p++) {
-				const packetMaterial = new THREE.MeshBasicMaterial({
-					color: nodeColor,
-					emissive: nodeColor,
-					emissiveIntensity: 0.8,
-					transparent: true,
-					opacity: 0.95,
-				});
-				const packet = new THREE.Mesh(packetGeometry, packetMaterial);
-				const baseSpeed = 0.003 + (traceIndex % 3) * 0.001;
-				packet.userData = {
-					traceIndex,
-					progress: p / packetCount,
-					speed: baseSpeed + Math.random() * 0.0015,
-				};
-				this.pcbGroup.add(packet);
-				this.dataPackets.push(packet);
-			}
-		});
-
-		this.pcbGroup.rotation.x = -Math.PI / 4;
-		this.pcbGroup.rotation.y = Math.PI / 8;
-		this.pcbGroup.scale.set(1.8, 1.8, 1.8);
-		this.pcbGroup.position.set(0, 0, 0);
-		this.scene.add(this.pcbGroup);
+		this.galaxy = new THREE.Group();
+		this.galaxy.rotation.x = Math.PI * 0.32;
+		this.galaxy.rotation.y = 0.12;
+		this.galaxy.rotation.z = -Math.PI / 4.2;
+		this.galaxy.scale.setScalar(1.9);
+		this.galaxy.position.z = -6;
+		this.galaxy.add(points);
+		this.scene.add(this.galaxy);
 	}
 
-	createLabelSprite(text, colorHex) {
+	createFallingStars() {
+		const count = this.isMobile ? 16 : 30;
+		const texture = this.createCometTexture();
+
+		for (let i = 0; i < count; i++) {
+			const material = new THREE.SpriteMaterial({
+				map: texture,
+				transparent: true,
+				opacity: 0,
+				depthWrite: false,
+				blending: THREE.AdditiveBlending,
+			});
+
+			material.color.setHSL(0.52 + Math.random() * 0.3, 0.5, 0.95);
+
+			const sprite = new THREE.Sprite(material);
+			sprite.userData = { speed: 1 };
+			this.spawnMeteor(sprite);
+			this.scene.add(sprite);
+			this.fallingStars.push(sprite);
+		}
+	}
+
+	spawnMeteor(star) {
+		const ud = star.userData;
+		ud.x = 30 + Math.random() * 8;
+		ud.y = 10 + (Math.random() - 0.5) * 20;
+		ud.z = -8 + Math.random() * 14;
+		ud.speed = 3 + Math.random() * 3.5;
+		ud.slope = 0.3 + Math.random() * 0.18;
+		ud.drift = (Math.random() - 0.5) * 0.15;
+	}
+
+	updateMeteor(star, dt) {
+		const ud = star.userData;
+		const time = Date.now() * 0.001;
+
+		ud.x -= ud.speed * dt;
+		ud.y -= ud.speed * ud.slope * dt;
+		ud.y += Math.sin(time * 1.5 + ud.x * 0.4) * ud.drift * dt * 6;
+
+		const travel = Math.hypot(ud.speed, ud.speed * ud.slope);
+		const angle = Math.atan2(ud.speed * ud.slope, ud.speed);
+
+		const fadeIn = Math.max(0, Math.min(1, (38 - ud.x) / 7));
+		const fadeOut = Math.max(0, Math.min(1, (ud.x + 26) / 7));
+		const glow = Math.min(0.95, 0.3 + travel * 0.12) * Math.min(fadeIn, fadeOut);
+
+		star.material.opacity = glow;
+		star.material.rotation = angle - Math.PI / 2;
+
+		const len = 1.8 + travel * 0.55;
+		star.scale.set(len * 0.22, len, 1);
+
+		star.position.set(ud.x, ud.y, ud.z);
+
+		if (ud.x < -28 || ud.y < -13 || ud.y > 14) {
+			this.spawnMeteor(star);
+			return;
+		}
+	}
+
+	createCometTexture() {
 		const canvas = document.createElement('canvas');
+		canvas.width = 64;
+		canvas.height = 160;
 		const ctx = canvas.getContext('2d');
-		canvas.width = 160;
-		canvas.height = 40;
 
-		ctx.fillStyle = 'rgba(0, 0, 0, 0)';
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.globalCompositeOperation = 'lighter';
 
-		ctx.font = 'bold 16px monospace';
-		ctx.textAlign = 'center';
-		ctx.textBaseline = 'middle';
+		const headX = canvas.width * 0.5;
+		const headY = canvas.height * 0.85;
 
-		const hex = '#' + ('000000' + (colorHex & 0xffffff).toString(16)).slice(-6);
-		ctx.fillStyle = hex;
-		ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+		const head = ctx.createRadialGradient(headX, headY, 0, headX, headY, 26);
+		head.addColorStop(0, 'rgba(255, 255, 255, 1)');
+		head.addColorStop(0.3, 'rgba(255, 250, 240, 0.55)');
+		head.addColorStop(1, 'rgba(255, 250, 240, 0)');
+		ctx.fillStyle = head;
+		ctx.beginPath();
+		ctx.arc(headX, headY, 26, 0, Math.PI * 2);
+		ctx.fill();
+
+		for (let i = 0; i < 40; i++) {
+			const s = i / 39;
+			const y = headY - s * 130;
+			const x = headX + (Math.sin(s * Math.PI * 1.4) + (s * s - s) * 4) * s * 16;
+			const radius = Math.max(1.1, 9 * Math.pow(1 - s, 2.2));
+			const alpha = Math.pow(1 - s, 2.4) * 0.8;
+
+			const circle = ctx.createRadialGradient(x, y, 0, x, y, radius);
+			circle.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
+			circle.addColorStop(1, 'rgba(255, 255, 255, 0)');
+			ctx.fillStyle = circle;
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI * 2);
+			ctx.fill();
+		}
+
+		ctx.globalCompositeOperation = 'source-over';
 
 		const texture = new THREE.CanvasTexture(canvas);
-		const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
-		const sprite = new THREE.Sprite(material);
-		sprite.scale.set(1.4, 0.35, 1);
-		return sprite;
+		return texture;
 	}
 
 	addEventListeners() {
@@ -362,49 +278,26 @@ class HeroScene {
 
 		requestAnimationFrame(() => this.animate());
 
-		this.targetX += (this.mouseX * 0.5 - this.targetX) * 0.02;
-		this.targetY += (this.mouseY * 0.5 - this.targetY) * 0.02;
+		const time = Date.now() * 0.001;
 
-		if (this.pcbGroup) {
-			this.pcbGroup.rotation.y += 0.0003;
-			this.pcbGroup.rotation.x += 0.0001;
+		this.targetX += (this.mouseX * 0.4 - this.targetX) * 0.02;
+		this.targetY += (this.mouseY * 0.4 - this.targetY) * 0.02;
 
-			this.dataPackets.forEach(packet => {
-				packet.userData.progress += packet.userData.speed;
-				if (packet.userData.progress > 1) {
-					packet.userData.progress = 0;
-					const tracePath = this.tracePaths[packet.userData.traceIndex];
-					packet.position.copy(tracePath.curve.getPointAt(0));
-				}
-				const tracePath = this.tracePaths[packet.userData.traceIndex];
-				const point = tracePath.curve.getPointAt(packet.userData.progress);
-				packet.position.lerp(point, 0.3);
-
-				const scale = 0.8 + Math.sin(packet.userData.progress * Math.PI * 3) * 0.4;
-				packet.scale.setScalar(scale);
-
-				const intensity = 0.4 + Math.sin(packet.userData.progress * Math.PI * 4) * 0.3;
-				packet.material.emissiveIntensity = intensity;
-			});
-
-			this.nodes.forEach((node, i) => {
-				const pulse = 0.3 + Math.sin(Date.now() * 0.002 + i * 0.4) * 0.2;
-				node.material.emissiveIntensity = pulse;
-			});
-
-			this.traces.forEach((trace, i) => {
-				const pulse = 0.2 + Math.sin(Date.now() * 0.001 + i * 0.15) * 0.1;
-				trace.material.emissiveIntensity = pulse;
-			});
+		if (this.galaxy) {
+			this.galaxy.rotation.y = 0.12 + Math.sin(time * 0.05) * 0.18;
+			this.galaxy.rotation.z = -Math.PI / 4.2 + Math.sin(time * 0.04) * 0.03;
+			this.galaxy.children[0].material.opacity = 0.9 + Math.sin(time * 0.5) * 0.08;
 		}
 
-		if (this.particles) {
-			this.particles.rotation.y += 0.0003;
-			this.particles.rotation.x += 0.0001;
+		if (this.starfield) {
+			this.starfield.material.opacity = 0.75 + Math.sin(time * 0.8) * 0.15;
+			this.starfield.rotation.y += 0.0003;
 		}
 
-		this.camera.position.x = this.targetX * 0.5;
-		this.camera.position.y = -this.targetY * 0.5;
+		this.fallingStars.forEach(star => this.updateMeteor(star, 1 / 60));
+
+		this.camera.position.x = this.targetX * 0.6;
+		this.camera.position.y = this.targetY * 0.4;
 		this.camera.lookAt(this.scene.position);
 
 		this.renderer.render(this.scene, this.camera);
