@@ -2,502 +2,713 @@
 <html lang="en">
 
 <head>
-	<title>Niko - Free Bootstrap 4 Template by Colorlib</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Dani Zakaria - Senior Software Engineer portfolio">
+	<meta name="theme-color" content="#0f0f23">
+	<title>Dani Zakaria — Senior Software Engineer</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+		rel="stylesheet">
 
-	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-	<link rel="stylesheet" href="css/animate.css">
-
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="css/magnific-popup.css">
-
-	<link rel="stylesheet" href="css/aos.css">
-
-	<link rel="stylesheet" href="css/ionicons.min.css">
-
-	<link rel="stylesheet" href="css/flaticon.css">
-	<link rel="stylesheet" href="css/icomoon.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body>
 
-
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">N</a>
-			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
-
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav nav ml-auto">
-					<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-					<li class="nav-item"><a href="#skills-section" class="nav-link"><span>Skills</span></a></li>
-					<!-- <li class="nav-item"><a href="#projects-section" class="nav-link"><span>Projects</span></a></li> -->
-					<li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-				</ul>
+	<!-- Loading Screen -->
+	<div class="loading-screen" id="loadingScreen">
+		<div class="loading-content">
+			<div class="loading-spinner">
+				<div class="spinner-ring"></div>
+				<div class="spinner-ring"></div>
+				<div class="spinner-ring"></div>
 			</div>
+			<span class="loading-text">Initializing Portfolio</span>
+		</div>
+	</div>
+
+	<!-- Cursor -->
+	<div class="cursor" id="cursor"></div>
+
+	<!-- Navigation -->
+	<nav class="navbar" id="navbar">
+		<div class="nav-container">
+			<a href="#" class="nav-logo">Dani Zakaria</a>
+			<ul class="nav-menu" id="navMenu">
+				<li><a href="#hero" class="nav-link active">Home</a></li>
+				<li><a href="#about" class="nav-link">About</a></li>
+				<li><a href="#skills" class="nav-link">Skills</a></li>
+				<li><a href="#projects" class="nav-link">Projects</a></li>
+				<li><a href="#experience" class="nav-link">Experience</a></li>
+				<li><a href="#contact" class="nav-link">Contact</a></li>
+			</ul>
+			<button class="menu-toggle" id="menuToggle">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
 		</div>
 	</nav>
-	<section id="home-section" class="hero">
-		<div class="home-slider  owl-carousel">
-			<div class="slider-item ">
-				<div class="overlay"></div>
-				<div class="container">
-					<div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
-						data-scrollax-parent="true">
-						<div class="one-third order-md-last img" style="background-image:url(images/bg_1.jpg);">
-							<div class="overlay"></div>
-						</div>
-						<div class="one-forth d-flex  align-items-center ftco-animate"
-							data-scrollax=" properties: { translateY: '70%' }">
-							<a href="https://vimeo.com/45830194"
-								class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-								<span class="ion-ios-play play"></span>
-							</a>
-							<div class="text">
-								<span class="subheading">Hello</span>
-								<h1 class="mb-4 mt-3">I'm <span>Dani Zakaria</span></h1>
-								<h2 class="mb-4">A Freelance Software Enginer</h2>
-								<p><a href="#" class="btn-custom">Hire me</a></p>
-							</div>
-						</div>
-					</div>
+
+	<!-- Hero Section -->
+	<section class="hero-section" id="hero">
+		<canvas class="hero-canvas" id="heroCanvas"></canvas>
+		<div class="hero-overlay"></div>
+		<div class="hero-content">
+			<div class="hero-text">
+				<p class="hero-greeting">Hello, I'm</p>
+				<h1 class="hero-name">Dani Zakaria</h1>
+				<div class="hero-title-wrap">
+					<span class="hero-title">Senior Software Engineer</span>
+					<span class="hero-subtitle">Building solutions across Mobile · Web · Database · Server</span>
+				</div>
+				<div class="hero-buttons">
+					<a href="#projects" class="btn btn-primary">View My Work</a>
+					<a href="#contact" class="btn btn-outline">✉️ Email Me</a>
+					<a href="#contact" class="btn btn-outline">Let's Talk</a>
 				</div>
 			</div>
-
-			<div class="slider-item">
-				<div class="overlay"></div>
-				<div class="container">
-					<div class="row d-flex no-gutters slider-text align-items-end justify-content-end"
-						data-scrollax-parent="true">
-						<div class="one-third order-md-last img" style="background-image:url(images/bg_2.jpg);">
-							<div class="overlay"></div>
-						</div>
-						<div class="one-forth d-flex align-items-center ftco-animate"
-							data-scrollax=" properties: { translateY: '70%' }">
-							<a href="https://vimeo.com/45830194"
-								class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-								<span class="ion-ios-play play"></span>
-							</a>
-							<div class="text">
-								<h1 class="mb-4 mt-3">More than 2 years experience as <span>Full Stack Developer</span>
-									with any platform</h1>
-								<p><a href="#" class="btn-custom">Hire me</a></p>
-							</div>
-						</div>
-					</div>
+			<div class="hero-stats">
+				<div class="stat">
+					<span class="stat-number">8+</span>
+					<span class="stat-label">Years Coding</span>
 				</div>
+				<div class="stat">
+					<span class="stat-number">50+</span>
+					<span class="stat-label">Projects Delivered</span>
+				</div>
+				<div class="stat">
+					<span class="stat-number">4</span>
+					<span class="stat-label">Domains Mastered</span>
+				</div>
+			</div>
+		</div>
+		<div class="scroll-indicator">
+			<span>Scroll to explore</span>
+			<div class="scroll-mouse">
+				<div class="scroll-dot"></div>
 			</div>
 		</div>
 	</section>
 
-	<section class="ftco-about ftco-counter img ftco-section" id="about-section">
+	<!-- About Section -->
+	<section class="about-section" id="about">
+		<div class="section-bg"></div>
 		<div class="container">
-			<div class="row d-flex">
-				<div class="col-md-6 col-lg-5 d-flex">
-					<div class="img-about img d-flex align-items-stretch">
-						<div class="overlay"></div>
-						<div class="img d-flex align-self-stretch align-items-center"
-							style="background-image:url(images/about-1.jpg);">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-7 pl-lg-5 py-5">
-					<div class="row justify-content-start pb-3">
-						<div class="col-md-12 heading-section ftco-animate">
-							<span class="subheading">Welcome</span>
-							<h2 class="mb-4" style="font-size: 34px; text-transform: capitalize;">About Me</h2>
-							<p>After graduating from college, I focused on developing software for businesses both small
-								and large scale. with experience with professional people, I can create applications in
-								a short time and quality</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="media block-6 services d-block ftco-animate">
-								<div class="icon"><span class="flaticon-analysis"></span></div>
-								<div class="media-body">
-									<h3 class="heading mb-3">Software Enginer</h3>
-									<p>We create and develop software from beginning to end or ongoing.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="media block-6 services d-block ftco-animate">
-								<div class="icon"><span class="flaticon-analysis"></span></div>
-								<div class="media-body">
-									<h3 class="heading mb-3">Full-Stack Developer</h3>
-									<p>We made the Front-End and Back-End in sync by one person</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="counter-wrap ftco-animate d-flex mt-md-3">
-						<div class="text p-4 pr-5 bg-primary">
-							<p class="mb-0">
-								<span class="number" data-number="20">0</span>
-								<span>Finished Projects</span>
-							</p>
-						</div>
-					</div>
-				</div>
+			<div class="section-header">
+				<span class="section-tag">01</span>
+				<h2 class="section-title">About Me</h2>
 			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section bg-light" id="skills-section">
-		<div class="container">
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">Skills</span>
-					<h2 class="mb-4">My Skills</h2>
-					<p>All that is needed to make a project that runs like an ecosystem</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>Laravel</h3>
-						<div class="progress">
-							<div class="progress-bar color-1" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-								aria-valuemax="100" style="width:85%">
-								<span>85%</span>
-							</div>
+			<div class="about-grid">
+				<div class="about-image-wrap">
+					<div class="about-3d-frame" id="aboutFrame">
+						<div class="about-image-inner">
+							<img src="images/about-1.jpg" alt="Dani Zakaria" class="about-photo">
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>Vue JS</h3>
-						<div class="progress">
-							<div class="progress-bar color-2" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-								aria-valuemax="100" style="width:75%">
-								<span>75%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>.NET FRAMEWORK</h3>
-						<div class="progress">
-							<div class="progress-bar color-3" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-								aria-valuemax="100" style="width:85%">
-								<span>85%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>SQL</h3>
-						<div class="progress">
-							<div class="progress-bar color-4" role="progressbar" aria-valuenow="88" aria-valuemin="0"
-								aria-valuemax="100" style="width:88%">
-								<span>88%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>GIT</h3>
-						<div class="progress">
-							<div class="progress-bar color-5" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-								aria-valuemax="100" style="width:70%">
-								<span>70%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>ANDROID</h3>
-						<div class="progress">
-							<div class="progress-bar color-6" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-								aria-valuemax="100" style="width:75%">
-								<span>75%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row justify-content-center py-5 mt-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">What I Do</span>
-					<h2 class="mb-4">Strategy, design and a bit of magic</h2>
-					<p>With more than 2 years experience with professional people, i'll make some a miracle</p>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-4 text-center d-flex ftco-animate">
-					<div class="services-1">
-						<span class="icon">
-							<i class="flaticon-analysis"></i>
-						</span>
-						<div class="desc">
-							<h3 class="mb-5"><a href="#">Explore</a></h3>
-							<h4>Design Type of Application</h4>
-							<h4>Looking for Requirement</h4>
-							<h4>Strategy to Build</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 text-center d-flex ftco-animate">
-					<div class="services-1">
-						<span class="icon">
-							<i class="flaticon-flasks"></i>
-						</span>
-						<div class="desc">
-							<h3 class="mb-5"><a href="#">Create</a></h3>
-							<h4>UI/UX Design</h4>
-							<h4>Implementation</h4>
-							<h4>Deployment to Server</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 text-center d-flex ftco-animate">
-					<div class="services-1">
-						<span class="icon">
-							<i class="flaticon-ideas"></i>
-						</span>
-						<div class="desc">
-							<h3 class="mb-5"><a href="#">More</a></h3>
-							<h4>User Testing</h4>
-							<h4>Maintenance</h4>
-							<h4>Follow-Up Apps</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section ftco-hireme">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-lg-9 d-flex align-items-center ftco-animate">
-					<h2>I'm <span>Available</span> For Freelancing <span>Or</span> Joining Your Company</h2>
-				</div>
-				<div class="col-md-4 col-lg-3 d-flex align-items-center ftco-animate">
-					<p class="mb-0"><a href="#" class="btn btn-white py-4 px-5">Hire me</a></p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<!-- <section class="ftco-section ftco-project" id="projects-section">
-		<div class="container">
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">Accomplishments</span>
-					<h2 class="mb-4">Our Projects</h2>
-					<p>An example of someone who became great with us</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8">
-					<div class="project img ftco-animate img-2 d-flex justify-content-center align-items-center"
-						style="background-image: url(images/project-1.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-							<span>Web Design</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-								style="background-image: url(images/project-2.jpg);">
-								<div class="overlay"></div>
-								<div class="text text-center p-4">
-									<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-									<span>Web Design</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-								style="background-image: url(images/project-3.jpg);">
-								<div class="overlay"></div>
-								<div class="text text-center p-4">
-									<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-									<span>Web Design</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-						style="background-image: url(images/project-4.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-							<span>Web Design</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-						style="background-image: url(images/project-5.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-							<span>Web Design</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-
-	<section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-		<div class="container">
-			<div class="row justify-content-center mb-5 pb-3">
-				<div class="col-md-7 heading-section text-center ftco-animate">
-					<span class="subheading">Contact</span>
-					<h2 class="mb-4">Contact Me</h2>
-					<p>To get the best service from us, please contact with complete information</p>
-				</div>
-			</div>
-
-			<div class="row no-gutters block-9">
-				<div class="col-md-6 order-md-last d-flex">
-					<form action="#" class="bg-light p-4 p-md-5 contact-form">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Your Name">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Your Email">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Subject">
-						</div>
-						<div class="form-group">
-							<textarea name="" id="" cols="30" rows="7" class="form-control"
-								placeholder="Message"></textarea>
-						</div>
-						<div class="form-group">
-							<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-						</div>
-					</form>
-
-				</div>
-
-				<div class="col-md-6 d-flex">
-					<div class="img" style="background-image: url(images/about.jpg);"></div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<footer class="ftco-footer ftco-section">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Slogan</h2>
-						<p>Make your best application for WEB, Mobile or Desktop device with us</p>
-						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<!-- <div class="ftco-footer-widget mb-4 ml-md-4">
-						<h2 class="ftco-heading-2">Links</h2>
-						<ul class="list-unstyled">
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Services</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Projects</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
-						</ul>
-					</div> -->
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Services</h2>
-						<ul class="list-unstyled">
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Web Development</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Android Development</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Desktop Development</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Mockop Any Device</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>System Analysis</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Have a Questions?</h2>
-						<div class="block-23 mb-3">
-							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">5 Street Melati of
-										Depok , Batang</span></li>
-								<li><a href="#"><span class="icon icon-phone"></span><span class="text">+62 8993 929
-											730</span></a></li>
-								<li><a href="#"><span class="icon icon-envelope"></span><span
-											class="text">danni.ootsutsuki@gmail.com</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-
-					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-						is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				<div class="about-content">
+					<p class="about-text">
+						Senior software engineer specializing in full-stack development across mobile, web,
+						database,
+						and server architectures. I craft scalable applications with clean architecture and
+						performant
+						infrastructure.
 					</p>
+					<div class="about-highlights">
+						<div class="highlight">
+							<div class="highlight-icon">📱</div>
+							<div class="highlight-text">
+								<h3>Mobile</h3>
+								<p>Android (Kotlin, Java) & iOS native development</p>
+							</div>
+						</div>
+						<div class="highlight">
+							<div class="highlight-icon">🌐</div>
+							<div class="highlight-text">
+								<h3>Web</h3>
+								<p>React, Vue, Angular with modern state management</p>
+							</div>
+						</div>
+						<div class="highlight">
+							<div class="highlight-icon">🗄️</div>
+							<div class="highlight-text">
+								<h3>Database</h3>
+								<p>PostgreSQL, MySQL, MongoDB, Redis optimization & design</p>
+							</div>
+						</div>
+						<div class="highlight">
+							<div class="highlight-icon">⚙️</div>
+							<div class="highlight-text">
+								<h3>Server</h3>
+								<p>Node.js, .NET, Go with Docker & cloud deployment</p>
+							</div>
+						</div>
+					</div>
+					<a href="#" class="btn btn-outline btn-sm">Download CV</a>
 				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Skills Section -->
+	<section class="skills-section" id="skills">
+		<div class="section-bg-alt"></div>
+		<div class="container">
+			<div class="section-header">
+				<span class="section-tag">02</span>
+				<h2 class="section-title">Technical Skills</h2>
+				<p class="section-desc"> Technologies I work with across the stack</p>
+			</div>
+			<div class="skills-grid">
+				<div class="skills-categories">
+					<div class="skill-category">
+						<h3 class="category-title">Mobile Development</h3>
+						<div class="skill-list">
+							<div class="skill-item">
+								<span class="skill-name">Android (Kotlin)</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+							</div>
+							<div class="skill-item">
+								<span class="skill-name">iOS (Swift)</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 70%"></div></div>
+							</div>
+							<div class="skill-item">
+								<span class="skill-name">Flutter</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+							</div>
+						</div>
+					</div>
+					<div class="skill-category">
+						<h3 class="category-title">Web Development</h3>
+						<div class="skill-list">
+							<div class="skill-item">
+								<span class="skill-name">React</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+							</div>
+							<div class="skill-item">
+								<span class="skill-name">Vue.js</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+							</div>
+							<div class="skill-item">
+								<span class="skill-name">TypeScript</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+							</div>
+						</div>
+					</div>
+					<div class="skill-category">
+						<h3 class="category-title">Database & Server</h3>
+						<div class="skill-list">
+							<div class="skill-item">
+								<span class="skill-name">PostgreSQL</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
+							</div>
+							<div class="skill-item">
+								<span class="skill-name">Node.js</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div>
+							</div>
+							<div class="skill-item">
+								<span class="skill-name">Docker / AWS</span>
+								<div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="skills-visualizer">
+					<canvas class="skills-canvas" id="skillsCanvas"></canvas>
+					<div class="visualizer-desc">
+						<p>Four core domains I architect solutions across:</p>
+						<ul class="domain-list">
+							<li class="domain-item" data-domain="mobile" style="--domain-color: #ff6b6b">Mobile</li>
+							<li class="domain-item" data-domain="web" style="--domain-color: #4ecdc4">Web</li>
+							<li class="domain-item" data-domain="database" style="--domain-color: #ffbe0b">Database</li>
+							<li class="domain-item" data-domain="server" style="--domain-color: #00f3ff">Server</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Projects Section -->
+	<section class="projects-section" id="projects">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-tag">03</span>
+				<h2 class="section-title">Selected Projects</h2>
+				<p class="section-desc"> A few things I've built </p>
+			</div>
+			<div class="projects-grid">
+				<div class="project-card">
+					<div class="project-inner">
+						<div class="project-front">
+							<div class="project-image">
+								<img src="images/project-1.jpg" alt="Project">
+								<div class="project-overlay">
+									<span class="project-icon">🚀</span>
+								</div>
+							</div>
+							<div class="project-info">
+								<span class="project-category">Full Stack</span>
+								<h3 class="project-title">E-Commerce Mobile App</h3>
+								<p class="project-excerpt">
+									A full-featured e-commerce application with real-time inventory
+									management and payment integration.
+								</p>
+								<div class="tech-stack">
+									<span class="tech">React Native</span>
+									<span class="tech">Node.js</span>
+									<span class="tech">PostgreSQL</span>
+								</div>
+							</div>
+						</div>
+						<div class="project-back">
+							<span class="project-category">Full Stack</span>
+							<h3 class="project-title">E-Commerce Mobile App</h3>
+							<ul class="project-details">
+								<li><span>Role:</span> Lead Mobile Developer</li>
+								<li><span>Period:</span> 6 months</li>
+								<li><span>Tech:</span> React Native, Node.js, PostgreSQL</li>
+							</ul>
+							<div class="project-links">
+								<a href="#" class="project-link">Live Demo</a>
+								<a href="#" class="project-link">Source Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="project-card">
+					<div class="project-inner">
+						<div class="project-front">
+							<div class="project-image">
+								<img src="images/project-2.jpg" alt="Project">
+								<div class="project-overlay">
+									<span class="project-icon">⚡</span>
+								</div>
+							</div>
+							<div class="project-info">
+								<span class="project-category">Backend</span>
+								<h3 class="project-title">Microservice API Platform</h3>
+								<p class="project-excerpt">
+									High-throughput microservice API platform with real-time analytics
+									dashboard and automated scaling.
+								</p>
+								<div class="tech-stack">
+									<span class="tech">Go</span>
+									<span class="tech">gRPC</span>
+									<span class="tech">Docker</span>
+								</div>
+							</div>
+						</div>
+						<div class="project-back">
+							<span class="project-category">Backend</span>
+							<h3 class="project-title">Microservice API Platform</h3>
+							<ul class="project-details">
+								<li><span>Role:</span> System Architect</li>
+								<li><span>Period:</span> 8 months</li>
+								<li><span>Tech:</span> Go, gRPC, Docker, Kubernetes</li>
+							</ul>
+							<div class="project-links">
+								<a href="#" class="project-link">Live Demo</a>
+								<a href="#" class="project-link">Source Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="project-card">
+					<div class="project-inner">
+						<div class="project-front">
+							<div class="project-image">
+								<img src="images/project-3.jpg" alt="Project">
+								<div class="project-overlay">
+									<span class="project-icon">📊</span>
+								</div>
+							</div>
+							<div class="project-info">
+								<span class="project-category">Data Dashboard</span>
+								<h3 class="project-title">Analytics Dashboard</h3>
+								<p class="project-excerpt">
+									Real-time analytics dashboard with interactive charts and predictive
+									data modeling for enterprise clients.
+								</p>
+								<div class="tech-stack">
+									<span class="tech">Vue.js</span>
+									<span class="tech">D3.js</span>
+									<span class="tech">MongoDB</span>
+								</div>
+							</div>
+						</div>
+						<div class="project-back">
+							<span class="project-category">Data Dashboard</span>
+							<h3 class="project-title">Analytics Dashboard</h3>
+							<ul class="project-details">
+								<li><span>Role:</span> Full Stack Developer</li>
+								<li><span>Period:</span> 4 months</li>
+								<li><span>Tech:</span> Vue.js, D3.js, MongoDB, Redis</li>
+							</ul>
+							<div class="project-links">
+								<a href="#" class="project-link">Live Demo</a>
+								<a href="#" class="project-link">Source Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="project-card">
+					<div class="project-inner">
+						<div class="project-front">
+							<div class="project-image">
+								<img src="images/project-4.jpg" alt="Project">
+								<div class="project-overlay">
+									<span class="project-icon">🎮</span>
+								</div>
+							</div>
+							<div class="project-info">
+								<span class="project-category">Mobile Game</span>
+								<h3 class="project-title">AR Mobile Game</h3>
+								<p class="project-excerpt">
+									Augmented reality mobile game with real-time 3D rendering,
+									multiplayer features and cloud sync.
+								</p>
+								<div class="tech-stack">
+									<span class="tech">Unity</span>
+									<span class="tech">C#</span>
+									<span class="tech">Firebase</span>
+								</div>
+							</div>
+						</div>
+						<div class="project-back">
+							<span class="project-category">Mobile Game</span>
+							<h3 class="project-title">AR Mobile Game</h3>
+							<ul class="project-details">
+								<li><span>Role:</span> Mobile Lead Developer</li>
+								<li><span>Period:</span> 10 months</li>
+								<li><span>Tech:</span> Unity, C#, AR Foundation, Firebase</li>
+							</ul>
+							<div class="project-links">
+								<a href="#" class="project-link">Live Demo</a>
+								<a href="#" class="project-link">Source Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="project-card">
+					<div class="project-inner">
+						<div class="project-front">
+							<div class="project-image">
+								<img src="images/project-5.jpg" alt="Project">
+								<div class="project-overlay">
+									<span class="project-icon">🔒</span>
+								</div>
+							</div>
+							<div class="project-info">
+								<span class="project-category">Security</span>
+								<h3 class="project-title">Blockchain Voting System</h3>
+								<p class="project-excerpt">
+									Decentralized voting application on blockchain with end-to-end
+									encryption and tamper-proof audit trails.
+								</p>
+								<div class="tech-stack">
+									<span class="tech">Solidity</span>
+									<span class="tech">Ethereum</span>
+									<span class="tech">React</span>
+								</div>
+							</div>
+						</div>
+						<div class="project-back">
+							<span class="project-category">Security</span>
+							<h3 class="project-title">Blockchain Voting System</h3>
+							<ul class="project-details">
+								<li><span>Role:</span> Blockchain Engineer</li>
+								<li><span>Period:</span> 7 months</li>
+								<li><span>Tech:</span> Solidity, Ethereum, React, Web3.js</li>
+							</ul>
+							<div class="project-links">
+								<a href="#" class="project-link">Live Demo</a>
+								<a href="#" class="project-link">Source Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="project-card">
+					<div class="project-inner">
+						<div class="project-front">
+							<div class="project-image">
+								<img src="images/project-6.jpg" alt="Project">
+								<div class="project-overlay">
+									<span class="project-icon">🚗</span>
+								</div>
+							</div>
+							<div class="project-info">
+								<span class="project-category">Mobile</span>
+								<h3 class="project-title">Ride-Sharing App</h3>
+								<p class="project-excerpt">
+									Real-time ride-sharing platform with GPS tracking, dynamic
+									pricing, and in-app chat functionality.
+								</p>
+								<div class="tech-stack">
+									<span class="tech">Kotlin</span>
+									<span class="tech">Firebase</span>
+									<span class="tech">Go</span>
+								</div>
+							</div>
+						</div>
+						<div class="project-back">
+							<span class="project-category">Mobile</span>
+							<h3 class="project-title">Ride-Sharing App</h3>
+							<ul class="project-details">
+								<li><span>Role:</span> Android Lead</li>
+								<li><span>Period:</span> 9 months</li>
+								<li><span>Tech:</span> Kotlin, Firebase, Go, Google Maps API</li>
+							</ul>
+							<div class="project-links">
+								<a href="#" class="project-link">Live Demo</a>
+								<a href="#" class="project-link">Source Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Experience Section -->
+	<section class="experience-section" id="experience">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-tag">04</span>
+				<h2 class="section-title">Work Experience</h2>
+				<p class="section-desc"> My professional journey </p>
+			</div>
+			<div class="timeline">
+				<div class="timeline-line"></div>
+				<div class="timeline-item">
+					<div class="timeline-marker">
+						<div class="marker-inner">
+							<span class="marker-company">TechCorp</span>
+						</div>
+					</div>
+					<div class="timeline-content">
+						<div class="timeline-header">
+							<h3 class="timeline-role">Lead Software Engineer</h3>
+							<span class="timeline-company">TechCorp — Jakarta</span>
+							<span class="timeline-duration">2022 — Present</span>
+						</div>
+						<ul class="timeline-achievements">
+							<li>Led a team of 8 engineers to deliver a microservices-based e-commerce
+								platform serving 500K+ active users.</li>
+							<li>Architected a Go-based payment processing service handling 2M+
+								transactions monthly.</li>
+							<li>Implemented CI/CD pipeline reducing deployment time from 30min to 8min.
+							</li>
+						</ul>
+						<div class="timeline-tech">
+							<span class="tech">Go</span>
+							<span class="tech">React</span>
+							<span class="tech">PostgreSQL</span>
+							<span class="tech">Docker</span>
+						</div>
+					</div>
+				</div>
+				<div class="timeline-item">
+					<div class="timeline-marker">
+						<div class="marker-inner">
+							<span class="marker-company">DevStart</span>
+						</div>
+					</div>
+					<div class="timeline-content">
+						<div class="timeline-header">
+							<h3 class="timeline-role">Senior Full Stack Developer</h3>
+							<span class="timeline-company">DevStart — Remote</span>
+							<span class="timeline-duration">2020 — 2022</span>
+						</div>
+						<ul class="timeline-achievements">
+							<li>Built and maintained a real-time analytics dashboard using Vue.js,
+								D3.js, and Redis streams.</li>
+							<li>Developed a cross-platform mobile app (React Native) with 4.8-star
+								rating on app stores.</li>
+							<li>Designed database schema optimizations improving query performance by
+								40%.</li>
+						</ul>
+						<div class="timeline-tech">
+							<span class="tech">Vue.js</span>
+							<span class="tech">React Native</span>
+							<span class="tech">MongoDB</span>
+							<span class="tech">Redis</span>
+						</div>
+					</div>
+				</div>
+				<div class="timeline-item">
+					<div class="timeline-marker">
+						<div class="marker-inner">
+							<span class="marker-company">Freelance</span>
+						</div>
+					</div>
+					<div class="timeline-content">
+						<div class="timeline-header">
+							<h3 class="timeline-role">Freelance Software Engineer</h3>
+							<span class="timeline-company">Self-employed — Depok</span>
+							<span class="timeline-duration">2018 — 2020</span>
+						</div>
+						<ul class="timeline-achievements">
+							<li>Delivered 15+ mobile and web applications for startups and small
+								businesses across Indonesia.</li>
+							<li>Specialized in rapid prototyping and MVP development using Laravel
+								and Android native.</li>
+							<li>Managed end-to-end deployment for 8 production applications on AWS.
+							</li>
+						</ul>
+						<div class="timeline-tech">
+							<span class="tech">Laravel</span>
+							<span class="tech">Android</span>
+							<span class="tech">AWS</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<section class="contact-section" id="contact">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-tag">05</span>
+				<h2 class="section-title">Get In Touch</h2>
+				<p class="section-desc"> Let's build something great together </p>
+			</div>
+			<div class="contact-grid">
+				<div class="contact-info">
+					<div class="contact-details">
+						<div class="contact-item">
+							<div class="contact-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+										stroke="currentColor" stroke-width="2"></path>
+									<path
+										d="M22 6l-10 7L2 6"
+										stroke="currentColor" stroke-width="2"></path>
+								</svg>
+							</div>
+							<div class="contact-meta">
+								<h3>Email</h3>
+								<a href="mailto:danni.ootsutsuki@gmail.com">danni.ootsutsuki@gmail.com</a>
+							</div>
+						</div>
+						<div class="contact-item">
+							<div class="contact-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M20 15.5c-1.25 0-2.45-.23-3.52-.65-.1.17-.18.35-.25.54.01.02.01.04 0 .06 0 1.36-.44 2.6-1.18 3.58 1.07 1.01 1.95 2.25 2.58 3.62.02-.02.03-.03.05-.05.1-.16.19-.32.27-.49-.1-.15-.2-.29-.31-.43-.1-.14-.2-.28-.3-.43 0-.01 0-.02-.01-.03-.01-.14-.01-.28 0-.42 0-.12.01-.23.02-.36.25-.09.49-.16.74-.16.26 0 .51.06.74.16-.06-.02-.11-.03-.16-.05-1.41-.45-2.32-1.76-2.32-3.23 0-.3.04-.59.1-.85-.34-.17-.7-.31-1.07-.42.32-.48.73-.89 1.2-1.24.02 0 .03-.02.05-.02.15-.01.3-.02.45-.02 1.09 0 2.09.32 2.95.89.01-.02.01-.04.01-.06 0-.14-.01-.29.03-.43.1-.35.32-.66.64-.89-.3-.07-.61-.12-.93-.12-1.21-.01-2.37.2-3.45.56-.1-.02-.2-.03-.31-.04-.1-.01-.2-.01-.31 0-.1.01-.2.02-.31.04C7.62 8.69 6 10.44 6 12.5c0 2.31 1.47 4.29 3.54 5.01-1.07-.82-1.99-1.82-2.69-2.95-.16-.29-.29-.59-.37-.9-.01-.04-.02-.08-.02-.12 0-.19-.02-.38 0-.56.01-.07.03-.13.05-.2.08-.25.2-.49.33-.72 0 0-.01-.02-.01-.03-.11-.15-.23-.29-.35-.43s-.23-.28-.34-.43c-.02 0-.04-.01-.05-.01-.39.27-.73.63-1 1.06-1.31-1.11-2.13-2.65-2.13-4.46 0-3.31 2.69-6 6-6 1.66 0 3.15.69 4.2 1.78l.01-.01c.07-.06.14-.12.21-.18.02-.01.03-.01.05-.02l-.02-.02c.42-.31 1.02-.81 1.5-1.25C14.6 5.98 13.67 5.5 12 5.5c-2.43 0-4.41 1.82-4.83 4.15-.42-.02-.84-.01-1.26-.01-3.31 0-6 2.69-6 6s2.69 6 6 6c.85 0 1.64-.25 2.3-.7l-.02 2.13c0 .01.01.02.02.03.26 0 .52-.02.78-.05.03 0 .06-.01.09-.01.11.03.22.07.33.1.05-.01.09-.02.14-.02.2-.02l-.01-.01c.13-.02.26-.03.39-.05l-.07-.11c-2.07-.68-3.5-2.6-3.5-4.86 0 .01 0 .01-.01.02.25-.06.5-.1 1.02-.14.02.01.05.03.07.05.42.15.82.34 1.68.81z"
+										fill="currentColor"></path>
+								</svg>
+							</div>
+							<div class="contact-meta">
+								<h3>Phone</h3>
+								<a href="tel:+628993929730">+62 8993 929 730</a>
+							</div>
+						</div>
+						<div class="contact-item">
+							<div class="contact-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M12 2C8.13 2 5 5.13 5 9.25 5 12.91 7.47 15.88 10.61 18.21 11.41 18.83 12.59 18.83 13.39 18.21C16.53 15.88 19 12.91 19 9.25 19 5.13 15.87 2 12 2z"
+										stroke="currentColor" stroke-width="2"></path>
+								</svg>
+							</div>
+							<div class="contact-meta">
+								<h3>Location</h3>
+								<span>Depok, Indonesia</span>
+							</div>
+						</div>
+					</div>
+					<div class="social-links">
+						<a href="#" class="social-link" aria-label="GitHub">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+								<path
+									d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.81 8.21 11.4.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.04-3.34.73-4.05-1.61-4.05-1.61C4.42 18.07 3.63 17.7 3.63 17.7c-1.09-.75-.07-.73-.07-.73-1.2.09-1.83.73-1.83.73-1.07 1.83-.25 2.83-.06 3.53.83 1.1 2.1 1.23 3.35.77.01-.78.04-1.94.17-3.14-1.8-.76-3.87-1.25-6.07-1.36.6-.92 1.39-2.63.6-5.08.19-.66.28-2.1.05-4.02l-.03-1.13c0-.57.16-1.64.92-2.46-.43-.21-1.43-.52-2.75-.58-.88 0-1.93.26-2.77.59.7.61 1.55 1.73 1.55 3.35-.01 2.05-1.25 3.81-2.97 4.82z"
+									fill="currentColor"></path>
+							</svg>
+						</a>
+						<a href="#" class="social-link" aria-label="LinkedIn">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+								<path
+									d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.89 1.62-1.83 3.34-1.83 3.58 0 4.24 2.36 4.24 5.45v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07s.93-2.07 2.07-2.07 2.07.93 2.07 2.07-.93 2.07-2.07 2.07zM7.05 20.45H3.63V9h3.42v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 0.77 23.2 0 22.22 0z"
+									fill="currentColor"></path>
+							</svg>
+						</a>
+						<a href="#" class="social-link" aria-label="Twitter">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+								<path
+									d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 1.389.779 2.604 1.927 3.289-.907-.014-1.757-.27-2.508-.672 0 .012 0 .024 0 .024-.003 1.943 1.376 3.563 3.2 3.941-.39.273-.8.438-1.238.438-.306 0-.597-.029-.883-.083 0 .057 0 .115 0 .173.003 2.697 1.934 4.915 4.52 5.422-.658.422-1.385.674-2.173.674-.29 0-.57-.024-.846-.07 0 .044 0 .09 0 .135.027 3.064 2.83 5.538 6.47 5.538-.94.273-1.934.417-2.962.417-.463 0-.91-.041-1.346-.116 0 .044 0 .09 0 .136 0 4.934 11.345 7.518 18.122 7.518 7.892 0 12.186-6.539 12.186-12.186 0-.013 0-.025 0-.038 0 .854-.173 1.676-.468 2.413z"
+									fill="currentColor">
+							</svg>
+						</a>
+					</div>
+				</div>
+				<div class="contact-form-container">
+					<form class="contact-form" id="contactForm">
+						<div class="form-grid">
+							<input type="text" class="form-input" placeholder="Your Name" required>
+							<input type="email" class="form-input" placeholder="Your Email" required>
+							<input type="text" class="form-input" placeholder="Subject">
+							<textarea class="form-input form-textarea" placeholder="Your Message"
+								rows="5" required></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Send Message</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="footer-content">
+			<div class="footer-logo">
+				<div class="footer-logo-text">Dani Zakaria</div>
+				<div class="footer-logo-sub">Senior Software Engineer</div>
+			</div>
+			<div class="footer-social">
+				<a href="#" class="footer-social-link" aria-label="GitHub">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path
+							d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.81 8.21 11.4.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.04-3.34.73-4.05-1.61-4.05-1.61C4.42 18.07 3.63 17.7 3.63 17.7c-1.09-.75-.07-.73-.07-.73-1.2.09-1.83.73-1.83.73-1.07 1.83-.25 2.83-.06 3.53.83 1.1 2.1 1.23 3.35.77.01-.78.04-1.94.17-3.14-1.8-.76-3.87-1.25-6.07-1.36.6-.92 1.39-2.63.6-5.08.19-.66.28-2.1.05-4.02l-.03-1.13c0-.57.16-1.64.92-2.46-.43-.21-1.43-.52-2.75-.58-.88 0-1.93.26-2.77.59.7.61 1.55 1.73 1.55 3.35-.01 2.05-1.25 3.81-2.97 4.82z"
+							fill="currentColor"></path>
+					</svg>
+				</a>
+				<a href="#" class="footer-social-link" aria-label="LinkedIn">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path
+							d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.89 1.62-1.83 3.34-1.83 3.58 0 4.24 2.36 4.24 5.45v6.27zM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07s.93-2.07 2.07-2.07 2.07.93 2.07 2.07-.93 2.07-2.07 2.07zM7.05 20.45H3.63V9h3.42v11.45zM22.22 0H1.77C.79 0 .01.77 0 1.72v20.56c0 .95.79 1.72 1.77 1.72h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .79 23.2 0 22.22 0z"
+							fill="currentColor"></path>
+					</svg>
+				</a>
+				<a href="#" class="footer-social-link" aria-label="Twitter">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path
+							d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 1.389.779 2.604 1.927 3.289-.907-.014-1.757-.27-2.508-.672 0 .012 0 .024 0 .024-.003 1.943 1.376 3.563 3.2 3.941-.39.273-.8.438-1.238.438-.306 0-.597-.029-.883-.083 0 .057 0 .115 0 .173.003 2.697 1.934 4.915 4.52 5.422-.658.422-1.385.674-2.173.674-.29 0-.57-.024-.846-.07 0 .044 0 .09 0 .135.027 3.064 2.83 5.538 6.47 5.538-.94.273-1.934.417-2.962.417-.463 0-.91-.041-1.346-.116 0 .044 0 .09 0 .136 0 4.934 11.345 7.518 18.122 7.518 7.892 0 12.186-6.539 12.186-12.186 0-.013 0-.025 0-.038 0 .854-.173 1.676-.468 2.413z"
+							fill="currentColor"></path>
+					</svg>
+				</a>
+			</div>
+			<div class="footer-bottom">
+				<span>&copy; 2024 Dani Zakaria. All rights reserved.</span>
 			</div>
 		</div>
 	</footer>
 
-
-
-	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-				stroke="#F96D00" /></svg></div>
-
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-	<script src="js/jquery.animateNumber.min.js"></script>
-	<script src="js/scrollax.min.js"></script>
-
+	<!-- Three.js -->
+	<script src="js/lib/three.min.js"></script>
+	<!-- GSAP -->
+	<script src="js/lib/gsap.min.js"></script>
+	<script src="js/lib/ScrollTrigger.min.js"></script>
 	<script src="js/main.js"></script>
 
 </body>
