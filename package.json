@@ -1,0 +1,15 @@
+{
+	"name": "dani-portfolio",
+	"version": "1.0.0",
+	"description": "Senior Software Engineer portfolio with 3D data flow animation",
+	"private": true,
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "bash scripts/deploy.sh",
+		"upload": "bash scripts/upload-assets.sh",
+		"preview": "npx http-server -p 3000"
+	},
+	"keywords": ["portfolio", "cloudflare", "worker", "threejs", "gsap"],
+	"author": "Dani Zakaria",
+	"license": "MIT"
+}

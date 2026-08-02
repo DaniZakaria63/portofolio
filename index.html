@@ -1,505 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-	<title>Niko - Free Bootstrap 4 Template by Colorlib</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-	<link rel="stylesheet" href="css/animate.css">
-
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="css/magnific-popup.css">
-
-	<link rel="stylesheet" href="css/aos.css">
-
-	<link rel="stylesheet" href="css/ionicons.min.css">
-
-	<link rel="stylesheet" href="css/flaticon.css">
-	<link rel="stylesheet" href="css/icomoon.css">
-	<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dani Zakaria is a senior Android engineer building private, on-device AI products.">
+  <meta name="theme-color" content="#11172a">
+  <title>Dani Zakaria | Android Engineer & On-device AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body>
+  <div class="loading-screen" id="loadingScreen"><span class="loading-mark">DZ</span><span>building quietly</span></div>
+  <div class="cursor" id="cursor"></div>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-container">
+      <a class="nav-logo" href="#hero"><span>DZ</span> / Dani Zakaria</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false"><i></i><i></i></button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a class="nav-link active" href="#hero">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#projects">Work</a></li>
+        <li><a class="nav-link" href="#experience">Experience</a></li>
+        <li><a class="nav-cta" href="#contact">Let's talk <span>↗</span></a></li>
+      </ul>
+    </div>
+  </nav>
 
+  <main>
+    <section class="hero-section" id="hero">
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas><div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <div class="eyebrow reveal"><span class="status-dot"></span> Available for senior Android roles <span class="eyebrow-place">Yogyakarta, ID / Remote</span></div>
+        <h1 class="hero-name reveal">I build software<br><em>that stays private.</em></h1>
+        <p class="hero-description reveal">Senior Android engineer turning complex ideas into fast, thoughtful products. Focused on on-device AI, modern Kotlin, and experiences that feel inevitable.</p>
+        <div class="hero-buttons reveal"><a href="#projects" class="button button-primary">Explore selected work <span>↓</span></a><a href="mailto:dani.zakaria@proton.me" class="text-link">Start a conversation <span>↗</span></a></div>
+        <div class="hero-bottom reveal"><span>Scroll to explore</span><div class="scroll-line"><i></i></div><div class="hero-stats"><div><strong>6+</strong><small>years building<br>for Android</small></div><div><strong>5M+</strong><small>users reached<br>through shipped work</small></div><div><strong>100%</strong><small>private AI<br>experiments</small></div></div></div>
+      </div>
+    </section>
 
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">N</a>
-			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
+    <section class="about-section section" id="about"><div class="container">
+      <div class="section-intro reveal"><span class="section-index">01 / 04</span><div><p class="kicker">The person behind the pixels</p><h2>Engineer with a<br><em>systems mindset.</em></h2></div></div>
+      <div class="about-grid"><div class="about-portrait reveal"><img src="images/about-1.jpg" alt="Dani Zakaria"><span class="portrait-label">Dani Zakaria / 2026</span></div><div class="about-copy reveal"><p class="lead">I care about the invisible parts of a product: the 200ms that makes an interaction feel instant, the architecture that lets a team move safely, and the trust created when data never has to leave a device.</p><p>For six years I have worked across fintech, government, and corporate Android teams. Today my deep interest is on-device machine learning: useful intelligence that works offline, respects the user, and ships as a real product.</p><div class="about-points"><div><b>01</b><span>Modern Android<br><small>Kotlin · Compose · Clean architecture</small></span></div><div><b>02</b><span>On-device intelligence<br><small>LLM · VLM · STT · TTS · Computer vision</small></span></div><div><b>03</b><span>Product-minded delivery<br><small>From a fuzzy brief to Play Store release</small></span></div></div></div></div>
+      <div class="skills-wrap"><div class="skills-heading"><p class="kicker">Toolkit</p><p>Tools are only useful when they help people.</p></div><div class="skills-list"><div class="skill-row"><span>01</span><strong>Android engineering</strong><div class="skill-tags"><i>Kotlin</i><i>Jetpack Compose</i><i>Coroutines</i><i>MVVM</i><i>JNI / NDK</i></div></div><div class="skill-row"><span>02</span><strong>Private AI systems</strong><div class="skill-tags"><i>llama.cpp</i><i>Whisper</i><i>sherpa-onnx</i><i>TensorFlow Lite</i><i>RAG</i></div></div><div class="skill-row"><span>03</span><strong>Web & motion</strong><div class="skill-tags"><i>JavaScript</i><i>Three.js</i><i>GSAP</i><i>Cloudflare</i></div></div></div></div>
+    </div></section>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav nav ml-auto">
-					<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-					<li class="nav-item"><a href="#skills-section" class="nav-link"><span>Skills</span></a></li>
-					<!-- <li class="nav-item"><a href="#projects-section" class="nav-link"><span>Projects</span></a></li> -->
-					<li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<section id="home-section" class="hero">
-		<div class="home-slider  owl-carousel">
-			<div class="slider-item ">
-				<div class="overlay"></div>
-				<div class="container">
-					<div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
-						data-scrollax-parent="true">
-						<div class="one-third order-md-last img" style="background-image:url(images/bg_1.jpg);">
-							<div class="overlay"></div>
-						</div>
-						<div class="one-forth d-flex  align-items-center ftco-animate"
-							data-scrollax=" properties: { translateY: '70%' }">
-							<a href="https://vimeo.com/45830194"
-								class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-								<span class="ion-ios-play play"></span>
-							</a>
-							<div class="text">
-								<span class="subheading">Hello</span>
-								<h1 class="mb-4 mt-3">I'm <span>Dani Zakaria</span></h1>
-								<h2 class="mb-4">A Freelance Software Enginer</h2>
-								<p><a href="#" class="btn-custom">Hire me</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+    <section class="projects-section section" id="projects"><div class="container">
+      <div class="section-intro reveal"><span class="section-index">02 / 04</span><div><p class="kicker">Selected work</p><h2>Things I built<br><em>and shipped.</em></h2></div><p class="section-aside">A mix of independent experiments and work delivered with product teams. Filter the archive, then press play.</p></div>
+      <div class="project-toolbar reveal" role="tablist" aria-label="Filter projects"><button class="filter active" data-filter="all">All work <sup>06</sup></button><button class="filter" data-filter="independent">Independent <sup>04</sup></button><button class="filter" data-filter="company">Company <sup>02</sup></button></div>
+      <div class="projects-grid">
+        <article class="project-card project-featured reveal" data-type="independent"><div class="project-media"><video autoplay muted loop playsinline preload="metadata" poster="images/project-1.jpg" aria-label="MemeLM app preview"><source src="images/demo-memelm.mp4" type="video/mp4"></video><div class="media-fallback" style="background-image:url('images/project-1.jpg')"></div><span class="media-status"><i></i> on-device / live</span></div><div class="project-info"><div class="project-meta"><span>Independent / 2025</span><span>01</span></div><h3>MemeLM Chat</h3><p>A vision-language chat app where images, messages, and reasoning stay on the phone. Custom JNI bridge into llama.cpp, Vulkan acceleration, zero cloud dependency.</p><div class="tech-stack"><i>Kotlin</i><i>MiniCPM-V</i><i>llama.cpp</i><i>Vulkan</i></div><a href="https://github.com/danizakaria63" target="_blank" rel="noopener" class="project-link">View project <span>↗</span></a></div></article>
+        <article class="project-card reveal" data-type="independent"><div class="project-media"><video autoplay muted loop playsinline preload="metadata" poster="images/project-2.jpg"><source src="images/demo-aoi.mp4" type="video/mp4"></video><div class="media-fallback" style="background-image:url('images/project-2.jpg')"></div><span class="media-status"><i></i> offline first</span></div><div class="project-info"><div class="project-meta"><span>Independent / 2024</span><span>02</span></div><h3>Aoi</h3><p>An offline avatar assistant with speech, LLM response, and expressive animation working together in real time.</p><div class="tech-stack"><i>Live2D</i><i>Whisper</i><i>sherpa-onnx</i></div><a href="https://github.com/danizakaria63" target="_blank" rel="noopener" class="project-link">View project <span>↗</span></a></div></article>
+        <article class="project-card reveal" data-type="independent"><div class="project-media"><video autoplay muted loop playsinline preload="metadata" poster="images/project-3.jpg"><source src="images/demo-guava.mp4" type="video/mp4"></video><div class="media-fallback" style="background-image:url('images/project-3.jpg')"></div><span class="media-status"><i></i> research-backed</span></div><div class="project-info"><div class="project-meta"><span>Independent / 2024</span><span>03</span></div><h3>Guava Disease Scanner</h3><p>Real-time leaf disease detection with CameraX and a custom CNN optimized for low-latency offline inference.</p><div class="tech-stack"><i>CameraX</i><i>TFLite</i><i>CNN</i></div><a href="https://github.com/danizakaria63" target="_blank" rel="noopener" class="project-link">View project <span>↗</span></a></div></article>
+        <article class="project-card reveal" data-type="company"><div class="project-media project-image" style="background-image:url('images/bg_1.jpg')"><span class="media-status"><i></i> 5M+ users</span></div><div class="project-info"><div class="project-meta"><span>Infosys / 2023–25</span><span>04</span></div><h3>BTN Mobile Banking</h3><p>Delivered seven major banking features and established modern Android standards inside a national-scale product.</p><div class="tech-stack"><i>Kotlin</i><i>Compose</i><i>Jetpack</i></div><a href="#experience" class="project-link">Read the story <span>↓</span></a></div></article>
+        <article class="project-card reveal" data-type="company"><div class="project-media project-image" style="background-image:url('images/bg_2.jpg')"><span class="media-status"><i></i> shipped</span></div><div class="project-info"><div class="project-meta"><span>Digital Code / 2020–22</span><span>05</span></div><h3>Fintech & Health Apps</h3><p>Shipped three production apps, redesigned product experiences, and passed a security audit with zero critical findings.</p><div class="tech-stack"><i>Android</i><i>Security</i><i>Clean architecture</i></div><a href="#experience" class="project-link">Read the story <span>↓</span></a></div></article>
+      </div>
+    </div></section>
 
-			<div class="slider-item">
-				<div class="overlay"></div>
-				<div class="container">
-					<div class="row d-flex no-gutters slider-text align-items-end justify-content-end"
-						data-scrollax-parent="true">
-						<div class="one-third order-md-last img" style="background-image:url(images/bg_2.jpg);">
-							<div class="overlay"></div>
-						</div>
-						<div class="one-forth d-flex align-items-center ftco-animate"
-							data-scrollax=" properties: { translateY: '70%' }">
-							<a href="https://vimeo.com/45830194"
-								class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-								<span class="ion-ios-play play"></span>
-							</a>
-							<div class="text">
-								<h1 class="mb-4 mt-3">More than 2 years experience as <span>Full Stack Developer</span>
-									with any platform</h1>
-								<p><a href="#" class="btn-custom">Hire me</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section class="experience-section section" id="experience"><div class="container"><div class="section-intro reveal"><span class="section-index">03 / 04</span><div><p class="kicker">The path so far</p><h2>Good work is<br><em>a team sport.</em></h2></div></div><div class="experience-list"><article class="experience-item reveal"><div class="experience-date">2023 — 2025<br><small>Yogyakarta</small></div><div class="experience-marker"></div><div class="experience-body"><p class="kicker">PT. Infosys Solusi Terpadu</p><h3>Staff Android Developer</h3><p>BTN Mobile Banking / National fintech</p><ul><li>Delivered QRIS, mortgage, cardless, auto debit, and priority banking features to a 5M+ user base.</li><li>Reduced regression bugs by approximately 25% through modern Android standards.</li><li>Owned change requests end-to-end with backend, QA, and design partners.</li></ul></div></article><article class="experience-item reveal"><div class="experience-date">2020 — 2022<br><small>Semarang</small></div><div class="experience-marker"></div><div class="experience-body"><p class="kicker">Digital Code</p><h3>Android Developer</h3><p>Software house / fintech & healthcare</p><ul><li>Deployed three apps to Google Play with 10,000+ combined installs and a 4.3 average rating.</li><li>Improved UI/UX satisfaction by approximately 15% across client products.</li><li>Cut crash rate by approximately 10% through Jetpack migration and optimization.</li></ul></div></article><article class="experience-item reveal"><div class="experience-date">2018 — 2022<br><small>Jakarta</small></div><div class="experience-marker"></div><div class="experience-body"><p class="kicker">Siber Asia University</p><h3>Software Engineering</h3><p>Degree / foundation for a career in product engineering</p></div></article></div></div></section>
 
-	<section class="ftco-about ftco-counter img ftco-section" id="about-section">
-		<div class="container">
-			<div class="row d-flex">
-				<div class="col-md-6 col-lg-5 d-flex">
-					<div class="img-about img d-flex align-items-stretch">
-						<div class="overlay"></div>
-						<div class="img d-flex align-self-stretch align-items-center"
-							style="background-image:url(images/about-1.jpg);">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-7 pl-lg-5 py-5">
-					<div class="row justify-content-start pb-3">
-						<div class="col-md-12 heading-section ftco-animate">
-							<span class="subheading">Welcome</span>
-							<h2 class="mb-4" style="font-size: 34px; text-transform: capitalize;">About Me</h2>
-							<p>After graduating from college, I focused on developing software for businesses both small
-								and large scale. with experience with professional people, I can create applications in
-								a short time and quality</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="media block-6 services d-block ftco-animate">
-								<div class="icon"><span class="flaticon-analysis"></span></div>
-								<div class="media-body">
-									<h3 class="heading mb-3">Software Enginer</h3>
-									<p>We create and develop software from beginning to end or ongoing.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="media block-6 services d-block ftco-animate">
-								<div class="icon"><span class="flaticon-analysis"></span></div>
-								<div class="media-body">
-									<h3 class="heading mb-3">Full-Stack Developer</h3>
-									<p>We made the Front-End and Back-End in sync by one person</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="counter-wrap ftco-animate d-flex mt-md-3">
-						<div class="text p-4 pr-5 bg-primary">
-							<p class="mb-0">
-								<span class="number" data-number="20">0</span>
-								<span>Finished Projects</span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section bg-light" id="skills-section">
-		<div class="container">
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">Skills</span>
-					<h2 class="mb-4">My Skills</h2>
-					<p>All that is needed to make a project that runs like an ecosystem</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>Laravel</h3>
-						<div class="progress">
-							<div class="progress-bar color-1" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-								aria-valuemax="100" style="width:85%">
-								<span>85%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>Vue JS</h3>
-						<div class="progress">
-							<div class="progress-bar color-2" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-								aria-valuemax="100" style="width:75%">
-								<span>75%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>.NET FRAMEWORK</h3>
-						<div class="progress">
-							<div class="progress-bar color-3" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-								aria-valuemax="100" style="width:85%">
-								<span>85%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>SQL</h3>
-						<div class="progress">
-							<div class="progress-bar color-4" role="progressbar" aria-valuenow="88" aria-valuemin="0"
-								aria-valuemax="100" style="width:88%">
-								<span>88%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>GIT</h3>
-						<div class="progress">
-							<div class="progress-bar color-5" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-								aria-valuemax="100" style="width:70%">
-								<span>70%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="progress-wrap ftco-animate">
-						<h3>ANDROID</h3>
-						<div class="progress">
-							<div class="progress-bar color-6" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-								aria-valuemax="100" style="width:75%">
-								<span>75%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row justify-content-center py-5 mt-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">What I Do</span>
-					<h2 class="mb-4">Strategy, design and a bit of magic</h2>
-					<p>With more than 2 years experience with professional people, i'll make some a miracle</p>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-4 text-center d-flex ftco-animate">
-					<div class="services-1">
-						<span class="icon">
-							<i class="flaticon-analysis"></i>
-						</span>
-						<div class="desc">
-							<h3 class="mb-5"><a href="#">Explore</a></h3>
-							<h4>Design Type of Application</h4>
-							<h4>Looking for Requirement</h4>
-							<h4>Strategy to Build</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 text-center d-flex ftco-animate">
-					<div class="services-1">
-						<span class="icon">
-							<i class="flaticon-flasks"></i>
-						</span>
-						<div class="desc">
-							<h3 class="mb-5"><a href="#">Create</a></h3>
-							<h4>UI/UX Design</h4>
-							<h4>Implementation</h4>
-							<h4>Deployment to Server</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 text-center d-flex ftco-animate">
-					<div class="services-1">
-						<span class="icon">
-							<i class="flaticon-ideas"></i>
-						</span>
-						<div class="desc">
-							<h3 class="mb-5"><a href="#">More</a></h3>
-							<h4>User Testing</h4>
-							<h4>Maintenance</h4>
-							<h4>Follow-Up Apps</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section ftco-hireme">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-lg-9 d-flex align-items-center ftco-animate">
-					<h2>I'm <span>Available</span> For Freelancing <span>Or</span> Joining Your Company</h2>
-				</div>
-				<div class="col-md-4 col-lg-3 d-flex align-items-center ftco-animate">
-					<p class="mb-0"><a href="#" class="btn btn-white py-4 px-5">Hire me</a></p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<!-- <section class="ftco-section ftco-project" id="projects-section">
-		<div class="container">
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">Accomplishments</span>
-					<h2 class="mb-4">Our Projects</h2>
-					<p>An example of someone who became great with us</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8">
-					<div class="project img ftco-animate img-2 d-flex justify-content-center align-items-center"
-						style="background-image: url(images/project-1.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-							<span>Web Design</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-								style="background-image: url(images/project-2.jpg);">
-								<div class="overlay"></div>
-								<div class="text text-center p-4">
-									<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-									<span>Web Design</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-								style="background-image: url(images/project-3.jpg);">
-								<div class="overlay"></div>
-								<div class="text text-center p-4">
-									<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-									<span>Web Design</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-						style="background-image: url(images/project-4.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-							<span>Web Design</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-						style="background-image: url(images/project-5.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3><a href="#">Branding &amp; Illustration Design</a></h3>
-							<span>Web Design</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-
-	<section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-		<div class="container">
-			<div class="row justify-content-center mb-5 pb-3">
-				<div class="col-md-7 heading-section text-center ftco-animate">
-					<span class="subheading">Contact</span>
-					<h2 class="mb-4">Contact Me</h2>
-					<p>To get the best service from us, please contact with complete information</p>
-				</div>
-			</div>
-
-			<div class="row no-gutters block-9">
-				<div class="col-md-6 order-md-last d-flex">
-					<form action="#" class="bg-light p-4 p-md-5 contact-form">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Your Name">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Your Email">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Subject">
-						</div>
-						<div class="form-group">
-							<textarea name="" id="" cols="30" rows="7" class="form-control"
-								placeholder="Message"></textarea>
-						</div>
-						<div class="form-group">
-							<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-						</div>
-					</form>
-
-				</div>
-
-				<div class="col-md-6 d-flex">
-					<div class="img" style="background-image: url(images/about.jpg);"></div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<footer class="ftco-footer ftco-section">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Slogan</h2>
-						<p>Make your best application for WEB, Mobile or Desktop device with us</p>
-						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<!-- <div class="ftco-footer-widget mb-4 ml-md-4">
-						<h2 class="ftco-heading-2">Links</h2>
-						<ul class="list-unstyled">
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Services</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Projects</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
-						</ul>
-					</div> -->
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Services</h2>
-						<ul class="list-unstyled">
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Web Development</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Android Development</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Desktop Development</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Mockop Any Device</a></li>
-							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>System Analysis</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Have a Questions?</h2>
-						<div class="block-23 mb-3">
-							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">5 Street Melati of
-										Depok , Batang</span></li>
-								<li><a href="#"><span class="icon icon-phone"></span><span class="text">+62 8993 929
-											730</span></a></li>
-								<li><a href="#"><span class="icon icon-envelope"></span><span
-											class="text">danni.ootsutsuki@gmail.com</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-
-					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-						is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-
-	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-				stroke="#F96D00" /></svg></div>
-
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-	<script src="js/jquery.animateNumber.min.js"></script>
-	<script src="js/scrollax.min.js"></script>
-
-	<script src="js/main.js"></script>
-
+    <section class="contact-section section" id="contact"><div class="container contact-panel reveal"><div><span class="section-index">04 / 04</span><p class="kicker">Have a product in mind?</p><h2>Let's make<br><em>something useful.</em></h2><p class="contact-copy">I’m open to senior Android roles, interesting collaborations, and conversations about private AI.</p></div><div class="contact-actions"><a class="contact-email" href="mailto:dani.zakaria@proton.me">dani.zakaria@proton.me <span>↗</span></a><div class="contact-links"><a href="https://github.com/danizakaria63" target="_blank" rel="noopener">GitHub ↗</a><a href="https://danizakaria63.github.io" target="_blank" rel="noopener">Portfolio ↗</a><a href="tel:+6282146673161">+62 8214 6673 161</a></div><p class="contact-note">Usually replies within 1–2 business days.</p></div></div></section>
+  </main>
+  <script src="js/lib/three.min.js"></script><script src="js/lib/gsap.min.js"></script><script src="js/lib/ScrollTrigger.min.js"></script><script src="js/main.js"></script>
 </body>
-
 </html>
