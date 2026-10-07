@@ -1,0 +1,25 @@
+# Example cloudflared ingress for the portfolio server.
+#
+# Merge these entries into your tunnel config (usually /etc/cloudflared/config.yml
+# or ~/.cloudflared/config.yml). Rules are matched top-down; the catch-all must
+# stay last. Restart the tunnel after editing:
+#
+#   sudo systemctl restart cloudflared
+#
+# Then create the DNS record for the deploy hostname (once):
+#
+#   cloudflared tunnel route dns <tunnel-name> deploy.dream-team.works
+
+ingress:
+  # CI deploy endpoint -> local deploy webhook (bearer-token protected)
+  - hostname: deploy.dream-team.works
+    service: http://127.0.0.1:8090
+
+  # The site itself -> nginx
+  - hostname: dream-team.works
+    service: http://127.0.0.1:80
+  - hostname: www.dream-team.works
+    service: http://127.0.0.1:80
+
+  # Everything else
+  - service: http_status:404
