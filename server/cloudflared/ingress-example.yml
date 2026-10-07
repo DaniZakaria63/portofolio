@@ -6,16 +6,12 @@
 #
 #   sudo systemctl restart cloudflared
 #
-# Then create the DNS record for the deploy hostname (once):
+# For the site hostname, create the DNS record once with:
 #
-#   cloudflared tunnel route dns <tunnel-name> deploy.dream-team.works
+#   cloudflared tunnel route dns <tunnel-name> dream-team.works
 
 ingress:
-  # CI deploy endpoint -> local deploy webhook (bearer-token protected)
-  - hostname: deploy.dream-team.works
-    service: http://127.0.0.1:8090
-
-  # The site itself -> nginx
+  # The site -> nginx (webroot: /var/www/dream-team.works)
   - hostname: dream-team.works
     service: http://127.0.0.1:80
   - hostname: www.dream-team.works
