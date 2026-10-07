@@ -67,12 +67,11 @@ npx wrangler deploy
 
 ## Server Deployment (dream-team.works)
 
-Pushing to `master` (or running the *Deploy* workflow manually) triggers
-`.github/workflows/deploy.yml`, which calls a deploy webhook on the server —
-published through the Cloudflare Tunnel. The server then pulls the latest
-`master` and rsyncs the static site into `/var/www/dream-team.works`.
+Pushing to `master` (or running the *Deploy* workflow manually) rsyncs the
+static site over SSH to the server at `dream-team.works`, where nginx serves
+`/var/www/dream-team.works` behind Cloudflare.
 
-Setup, troubleshooting, and security notes: [server/README.md](server/README.md).
+Setup, secrets, and troubleshooting: [server/README.md](server/README.md).
 
 The existing Workers/KV pipeline (`npm run upload` / `npm run deploy`) is
 unchanged.
@@ -97,14 +96,10 @@ To customize 3D colors, update the `colorPalette` in `createParticles()` and the
 portfolio/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml  # CI: deploy to server on push to master
-├── server/             # Server-side deploy kit (see server/README.md)
-│   ├── deploy-webhook.py          # authenticated deploy webhook
-│   ├── deploy-portfolio.sh        # git pull + rsync to webroot
-│   ├── deploy-webhook.env.example
-│   ├── systemd/deploy-webhook.service
-│   ├── nginx/                     # vhost + security headers
-│   └── cloudflared/               # tunnel ingress example
+│       └── deploy.yml  # CI: rsync deploy to server on push to master
+├── server/             # Server-side setup kit (see server/README.md)
+│   ├── nginx/          # vhost + security headers
+│   └── cloudflared/    # tunnel ingress example
 ├── index.html          # Main HTML structure
 ├── css/
 │   └── style.css       # All styling (modern CSS, no framework)
