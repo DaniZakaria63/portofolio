@@ -18,7 +18,7 @@ Everything below is one-time setup. Commands marked **server** run over SSH on t
 
 ## 0. Prerequisites
 
-- **server**: sudo SSH access via the server IP, `rsync`, and `nginx`.
+- **server**: sudo SSH access via the server IP (the bootstrap script in step 4 installs `rsync` and `nginx` for you).
 - **local**: `ssh`, `ssh-keygen`, `scp`, and optionally the `gh` CLI for secrets.
 
 ## 1. Server setup
@@ -107,7 +107,24 @@ rsync flags in use: `--delete` mirrors the webroot, `.well-known/` is protected,
 
 ## 4. Serve the site with nginx (fixes the current 521)
 
-Copy the configs from your local checkout:
+### Option A - bootstrap script (recommended)
+
+One script installs and configures everything: `nginx` + `rsync`, the `deploy` user and webroot, the vhost and security headers, and it starts nginx. Idempotent, safe to re-run.
+
+```bash
+# local - copy the script and the nginx configs to the server
+scp server/bootstrap.sh server/nginx/security-headers.conf server/nginx/dream-team.works.conf <admin-user>@<server-ip>:/tmp/
+```
+
+```bash
+# server
+sudo bash /tmp/bootstrap.sh
+
+# or install the CI public key from step 1b in the same run (paste its line)
+sudo bash /tmp/bootstrap.sh --ci-pubkey 'ssh-ed25519 AAAA... github-actions-deploy'
+```
+
+### Option B - manual install
 
 ```bash
 # local
