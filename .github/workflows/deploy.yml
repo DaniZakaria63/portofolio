@@ -1,0 +1,42 @@
+# Deploy the portfolio to the dream-team.works origin server on every push to master.
+#
+# Chain: GitHub Actions -> POST to the deploy webhook (published through the
+# Cloudflare Tunnel) -> the server runs server/deploy-portfolio.sh, which pulls
+# the latest master and rsyncs the static files into the webroot.
+#
+# Required repository secrets (Settings -> Secrets and variables -> Actions):
+#   DEPLOY_WEBHOOK_URL    e.g. https://deploy.dream-team.works/deploy
+#   DEPLOY_WEBHOOK_TOKEN  same value as DEPLOY_TOKEN in /etc/deploy-webhook.env
+#
+# Full setup, testing and troubleshooting: server/README.md
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Trigger server deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Call deploy webhook
+        env:
+          DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+          DEPLOY_WEBHOOK_TOKEN: ${{ secrets.DEPLOY_WEBHOOK_TOKEN }}
+        run: |
+          set -o pipefail
+          curl --fail-with-body --silent --show-error \
+            --retry 3 --retry-delay 5 --retry-all-errors --max-time 300 \
+            -X POST "$DEPLOY_WEBHOOK_URL" \
+            -H "Authorization: Bearer $DEPLOY_WEBHOOK_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{}' | tee deploy-response.json
