@@ -1,12 +1,15 @@
-# Deploy the portfolio to the dream-team.works origin server on every push to master.
+# Deploy the portfolio to the dream-team.works server on every push to master.
 #
-# Chain: GitHub Actions -> POST to the deploy webhook (published through the
-# Cloudflare Tunnel) -> the server runs server/deploy-portfolio.sh, which pulls
-# the latest master and rsyncs the static files into the webroot.
+# The job stages the static site (index.html, css/, js/, images/) and rsyncs it
+# over SSH, so the webroot becomes an exact mirror of those files. Everything
+# else in the repo (scripts/, docs, ...) stays out of the webroot.
 #
 # Required repository secrets (Settings -> Secrets and variables -> Actions):
-#   DEPLOY_WEBHOOK_URL    e.g. https://deploy.dream-team.works/deploy
-#   DEPLOY_WEBHOOK_TOKEN  same value as DEPLOY_TOKEN in /etc/deploy-webhook.env
+#   DEPLOY_HOST         server IP or hostname
+#   DEPLOY_USER         SSH user ("deploy" in the runbook)
+#   DEPLOY_SSH_KEY      private key whose public half is in that user's authorized_keys
+#   DEPLOY_KNOWN_HOSTS  output of: ssh-keyscan -p <port> <host>
+#   DEPLOY_PORT         optional, defaults to 22
 #
 # Full setup, testing and troubleshooting: server/README.md
 name: Deploy
@@ -16,7 +19,8 @@ on:
     branches: [master]
   workflow_dispatch:
 
-permissions: {}
+permissions:
+  contents: read
 
 concurrency:
   group: deploy-production
@@ -24,19 +28,50 @@ concurrency:
 
 jobs:
   deploy:
-    name: Trigger server deploy
+    name: Rsync to server
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Call deploy webhook
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
         env:
-          DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
-          DEPLOY_WEBHOOK_TOKEN: ${{ secrets.DEPLOY_WEBHOOK_TOKEN }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         run: |
-          set -o pipefail
-          curl --fail-with-body --silent --show-error \
-            --retry 3 --retry-delay 5 --retry-all-errors --max-time 300 \
-            -X POST "$DEPLOY_WEBHOOK_URL" \
-            -H "Authorization: Bearer $DEPLOY_WEBHOOK_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d '{}' | tee deploy-response.json
+          for name in DEPLOY_SSH_KEY DEPLOY_KNOWN_HOSTS; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error::$name secret is not set"
+              exit 1
+            fi
+          done
+          mkdir -p "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$HOME/.ssh/deploy_key"
+          chmod 600 "$HOME/.ssh/deploy_key"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+      - name: Deploy with rsync
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          if [ -z "${DEPLOY_HOST:-}" ] || [ -z "${DEPLOY_USER:-}" ]; then
+            echo "::error::DEPLOY_HOST / DEPLOY_USER secrets are not set"
+            exit 1
+          fi
+
+          stage="$(mktemp -d)"
+          cp -a index.html css js images "$stage"/
+
+          # -c: checksum comparison, so rsync's size+mtime quick check can
+          #     never skip a changed file (same-size edits, mtime granularity)
+          # -i: itemized output so every change is visible in the Actions log
+          rsync -azci --delete --filter='P .well-known/***' \
+            -e "ssh -i $HOME/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -p ${DEPLOY_PORT:-22}" \
+            "$stage"/ "$DEPLOY_USER@$DEPLOY_HOST:/var/www/dream-team.works/"
+
+          echo "Deployed $(git rev-parse --short HEAD) to $DEPLOY_HOST"
