@@ -65,11 +65,12 @@ npm run upload
 npx wrangler deploy
 ```
 
-## Server Deployment (dream-team.works)
+## Server Deployment
 
 Pushing to `master` (or running the *Deploy* workflow manually) rsyncs the
-static site over SSH to the server at `dream-team.works`, where nginx serves
-`/var/www/dream-team.works` behind Cloudflare.
+static site over SSH to the server, where nginx serves it from
+`/var/www/danizakaria.tech` behind Cloudflare. `dream-team.works` serves a
+static "on progress" page from the same server.
 
 Setup, secrets, and troubleshooting: [server/README.md](server/README.md).
 
