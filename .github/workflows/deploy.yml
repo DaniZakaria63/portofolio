@@ -1,4 +1,4 @@
-# Deploy the portfolio to the dream-team.works server on every push to master.
+# Deploy the portfolio to the server on every push to master.
 #
 # The job stages the static site (index.html, css/, js/, images/) and rsyncs it
 # over SSH, so the webroot becomes an exact mirror of those files. Everything
