@@ -65,7 +65,7 @@ jobs:
           fi
 
           stage="$(mktemp -d)"
-          cp -a index.html css js images "$stage"/
+          cp -a index.html css js images robots.txt sitemap.xml "$stage"/
 
           # -c: checksum comparison, so rsync's size+mtime quick check can
           #     never skip a changed file (same-size edits, mtime granularity)
