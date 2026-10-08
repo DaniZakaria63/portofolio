@@ -1,0 +1,21 @@
+# Example cloudflared ingress for the portfolio server.
+#
+# Merge these entries into your tunnel config (usually /etc/cloudflared/config.yml
+# or ~/.cloudflared/config.yml). Rules are matched top-down; the catch-all must
+# stay last. Restart the tunnel after editing:
+#
+#   sudo systemctl restart cloudflared
+#
+# For the site hostname, create the DNS record once with:
+#
+#   cloudflared tunnel route dns <tunnel-name> dream-team.works
+
+ingress:
+  # The site -> nginx (webroot: /var/www/dream-team.works)
+  - hostname: dream-team.works
+    service: http://127.0.0.1:80
+  - hostname: www.dream-team.works
+    service: http://127.0.0.1:80
+
+  # Everything else
+  - service: http_status:404

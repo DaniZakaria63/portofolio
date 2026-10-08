@@ -65,6 +65,17 @@ npm run upload
 npx wrangler deploy
 ```
 
+## Server Deployment (dream-team.works)
+
+Pushing to `master` (or running the *Deploy* workflow manually) rsyncs the
+static site over SSH to the server at `dream-team.works`, where nginx serves
+`/var/www/dream-team.works` behind Cloudflare.
+
+Setup, secrets, and troubleshooting: [server/README.md](server/README.md).
+
+The existing Workers/KV pipeline (`npm run upload` / `npm run deploy`) is
+unchanged.
+
 ## Customization
 
 Replace the placeholder data in `index.html`:
@@ -83,6 +94,12 @@ To customize 3D colors, update the `colorPalette` in `createParticles()` and the
 
 ```
 portfolio/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml  # CI: rsync deploy to server on push to master
+├── server/             # Server-side setup kit (see server/README.md)
+│   ├── nginx/          # vhost + security headers
+│   └── cloudflared/    # tunnel ingress example
 ├── index.html          # Main HTML structure
 ├── css/
 │   └── style.css       # All styling (modern CSS, no framework)

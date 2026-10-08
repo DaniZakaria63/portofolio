@@ -21,6 +21,12 @@ No lint, typecheck, or test tooling exists.
 - **worker.js is the only backend**: serves KV keys 1:1 from path (`/` → `index.html`), SPA-fallback to `index.html` for unknown paths, immutable cache for `css/js`, `must-revalidate` for html, security headers baked in.
 - **Deployment is two-phase**: upload assets to KV, then deploy worker — worker reads KV at request time, so asset uploads can be done without redeploying.
 
+## Server deployment (dream-team.works)
+
+- Push to `master` → `.github/workflows/deploy.yml` rsyncs `index.html css js images` over SSH to `/var/www/dream-team.works` (secrets: `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PORT`, `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`).
+- The server has no repo checkout: nginx serves the webroot and Cloudflare stays in front via tunnel. Config templates in `server/nginx/` and `server/cloudflared/`; full runbook in `server/README.md`.
+- Separate from the Cloudflare Workers/KV pipeline above; both are maintained.
+
 ## Customization
 
 Content lives inline in `index.html` (bio, projects, skills, experience, contact — see README table). 3D scene config is in `js/main.js`: hero = space scene (`createGalaxy()` milky-way band, `createStarfield()`, `createFallingStars()` rain-streak pool); skills = orbiting spheres. Camera/lights in each scene's `init()`.
