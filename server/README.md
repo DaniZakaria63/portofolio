@@ -1,4 +1,4 @@
-# Deploying to dream-team.works
+# Deploying the portfolio (danizakaria.tech) to the server
 
 How the site gets from a push to `master` onto the server:
 
@@ -6,7 +6,7 @@ How the site gets from a push to `master` onto the server:
 GitHub push to master
 └─ GitHub Actions  (.github/workflows/deploy.yml)
    └─ rsync over SSH  (deploy key, pinned host key)
-      └─ <server-ip>:/var/www/dream-team.works
+      └─ <server-ip>:/var/www/danizakaria.tech
          └─ nginx → Cloudflare Tunnel → visitors
 ```
 
@@ -28,7 +28,7 @@ Everything below is one-time setup. Commands marked **server** run over SSH on t
 ```bash
 # server
 sudo useradd --create-home --shell /bin/bash deploy
-sudo install -d -o deploy -g deploy -m 755 /var/www/dream-team.works
+sudo install -d -o deploy -g deploy -m 755 /var/www/danizakaria.tech
 ```
 
 ### 1b. CI key pair
@@ -101,7 +101,7 @@ gh secret set DEPLOY_KNOWN_HOSTS < known_hosts
 
 1. checks out the repo;
 2. writes `DEPLOY_SSH_KEY` / `DEPLOY_KNOWN_HOSTS` into `~/.ssh` on the runner (missing secrets fail the job with a clear error);
-3. stages `index.html css js images`, then rsyncs the stage to `/var/www/dream-team.works/`.
+3. stages `index.html css js images`, then rsyncs the stage to `/var/www/danizakaria.tech/`.
 
 rsync flags in use: `--delete` mirrors the webroot, `.well-known/` is protected, `-c` compares checksums (so same-size edits can never be skipped), `-i` lists exactly what changed in the log. The job is green only if rsync succeeds.
 
@@ -123,7 +123,7 @@ sudo ln -s /etc/nginx/sites-available/dream-team.works.conf /etc/nginx/sites-ena
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-- If you run another web server (Caddy, Apache), point its document root at `/var/www/dream-team.works` and mirror the headers/caching from the nginx config.
+- If you run another web server (Caddy, Apache), point its document root at `/var/www/danizakaria.tech` and mirror the headers/caching from the nginx config.
 - Cloudflare SSL/TLS mode: with the tunnel the origin is plain HTTP on localhost, so **Flexible** works. For end-to-end TLS, install a Cloudflare Origin Certificate and use **Full (strict)**.
 - The tunnel route for the site hostname must point at nginx — see `server/cloudflared/ingress-example.yml`.
 
@@ -133,7 +133,7 @@ If the site still returns 521 afterwards:
 # server
 systemctl status cloudflared
 cloudflared tunnel list
-curl -sI -H 'Host: dream-team.works' http://127.0.0.1/   # nginx answering locally?
+curl -sI -H 'Host: danizakaria.tech' http://127.0.0.1/   # nginx answering locally?
 ```
 
 ## 5. First deploy
@@ -143,8 +143,8 @@ Merge the workflow to `master`, then push (or run Actions → Deploy → Run wor
 Verify:
 
 - the Actions run is green and its rsync output lists the transferred files;
-- on the server: `ls -la /var/www/dream-team.works`;
-- `curl -sI https://dream-team.works` → 200.
+- on the server: `ls -la /var/www/danizakaria.tech`;
+- `curl -sI https://danizakaria.tech` → 200.
 
 ## Day-to-day
 
@@ -162,12 +162,12 @@ Verify:
 | `Permission denied (publickey)` | key missing from `authorized_keys` or wrong user — test with `ssh -i deploy_key deploy@<ip> 'echo ok'` |
 | `Host key verification failed` | `DEPLOY_KNOWN_HOSTS` is stale — re-run `ssh-keyscan` and update the secret |
 | `rsync: command not found` | install rsync on the server (`sudo apt install rsync`) |
-| Deploy green but site unchanged | confirm you pushed to `master`, and that nginx `root` is `/var/www/dream-team.works` |
+| Deploy green but site unchanged | confirm you pushed to `master`, and that nginx `root` is `/var/www/danizakaria.tech` |
 | HTTP 521 after deploy | tunnel/nginx issue — see step 4 diagnostics |
 
 ## Security notes
 
 - The SSH key is scoped to the `deploy` user only; revoke access by removing its `authorized_keys` line.
 - GitHub-hosted runners use dynamic Azure IP ranges, so firewall allowlisting by IP isn't practical — rely on key-only auth (disable password authentication in sshd, optionally add fail2ban).
-- Optionally scope the key further with `restrict,command="rrsync -wo /var/www/dream-team.works"` in `authorized_keys`; test a deploy afterwards (rrsync may reject the `--filter` option — drop it if so).
+- Optionally scope the key further with `restrict,command="rrsync -wo /var/www/danizakaria.tech"` in `authorized_keys`; test a deploy afterwards (rrsync may reject the `--filter` option — drop it if so).
 - The host key is pinned via `DEPLOY_KNOWN_HOSTS`, so there is no trust-on-first-use window.

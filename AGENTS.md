@@ -23,7 +23,7 @@ No lint, typecheck, or test tooling exists.
 
 ## Server deployment (dream-team.works)
 
-- Push to `master` → `.github/workflows/deploy.yml` rsyncs `index.html css js images` over SSH to `/var/www/dream-team.works` (secrets: `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PORT`, `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`).
+- Push to `master` → `.github/workflows/deploy.yml` rsyncs `index.html css js images` over SSH to `/var/www/danizakaria.tech` (portfolio; `dream-team.works` serves a static placeholder). Secrets: `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PORT`, `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`.
 - The server has no repo checkout: nginx serves the webroot and Cloudflare stays in front via tunnel. Config templates in `server/nginx/` and `server/cloudflared/`; full runbook in `server/README.md`.
 - Separate from the Cloudflare Workers/KV pipeline above; both are maintained.
 
