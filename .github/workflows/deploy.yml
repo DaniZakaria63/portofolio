@@ -72,6 +72,6 @@ jobs:
           # -i: itemized output so every change is visible in the Actions log
           rsync -azci --delete --chmod=D755,F644 --filter='P .well-known/***' \
             -e "ssh -i $HOME/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -p ${DEPLOY_PORT:-22}" \
-            "$stage"/ "$DEPLOY_USER@$DEPLOY_HOST:/var/www/dream-team.works/"
+            "$stage"/ "$DEPLOY_USER@$DEPLOY_HOST:/var/www/danizakaria.tech/"
 
           echo "Deployed $(git rev-parse --short HEAD) to $DEPLOY_HOST"
