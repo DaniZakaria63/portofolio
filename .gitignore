@@ -8,6 +8,10 @@ dist/
 .wrangler/
 .public-tmp/
 
+# Responsive/design verification artefacts (screenshots, reports).
+# Delete before `npm run deploy`: deploy.sh bulk-uploads the whole cwd to KV.
+.taste-skill/
+
 # Logs
 *.log
 npm-debug.log*
